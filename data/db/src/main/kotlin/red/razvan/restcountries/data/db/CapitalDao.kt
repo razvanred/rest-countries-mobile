@@ -1,0 +1,29 @@
+// Copyright 2025 Răzvan Roșu
+// SPDX-License-Identifier: Apache-2.0
+
+package red.razvan.restcountries.data.db
+
+import androidx.room.Dao
+import androidx.room.Query
+import androidx.room.Upsert
+import kotlinx.coroutines.flow.Flow
+
+@Dao
+interface CapitalDao {
+
+  @Upsert
+  suspend fun upsert(capitals: List<Capital>)
+
+  @Query(
+    """
+            SELECT *
+            FROM capital
+            WHERE name IN (
+                SELECT capital_name
+                FROM country_capital_cross_ref
+                WHERE country_header_id = :countryId
+            )
+        """,
+  )
+  fun observeByCountryId(countryId: red.razvan.restcountries.data.db.CountryId): Flow<List<Capital>>
+}
