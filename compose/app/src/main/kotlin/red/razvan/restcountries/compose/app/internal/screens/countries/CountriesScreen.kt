@@ -25,13 +25,17 @@ import androidx.compose.material3.SwipeToDismissBox
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
+import androidx.compose.material3.pulltorefresh.PullToRefreshDefaults.Indicator
+import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -80,6 +84,7 @@ internal fun CountriesScreen(
     .exitUntilCollapsedScrollBehavior()
 
   val snackbarHostState = remember { SnackbarHostState() }
+  val pullToRefreshState = rememberPullToRefreshState()
 
   val swipeToDismissBoxState = rememberSwipeToDismissBoxState()
 
@@ -140,7 +145,11 @@ internal fun CountriesScreen(
             .imePadding()
             .fillMaxWidth(),
         ) {
-          Snackbar(snackbarData = data)
+          Snackbar(
+            snackbarData = data,
+            modifier = Modifier
+              .testTag("snackbar"),
+          )
         }
       }
     },
@@ -151,6 +160,16 @@ internal fun CountriesScreen(
       isRefreshing = state.isRefreshing,
       onRefresh = onRefresh,
       modifier = Modifier.padding(containerPadding),
+      state = pullToRefreshState,
+      indicator = {
+        Indicator(
+          modifier = Modifier
+            .align(Alignment.TopCenter)
+            .testTag("pull-to-refresh-indicator"),
+          isRefreshing = state.isRefreshing,
+          state = pullToRefreshState,
+        )
+      },
     ) {
       CountriesLazyColumn(
         contentPadding = contentPadding,
