@@ -6,8 +6,16 @@
 The _one and only_ Android application that displays the countries from the [REST Countries public API](https://restcountries.com/).
 
 <div align="center" style="margin:auto">
-   <img src="docs/assets/pixel9a-countries-screen.png" width="300px" hspace="30" />
-   <img src="docs/assets/pixel9a-details-screen.png" width="300px" hspace="30" />
+   <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="docs/assets/pixel9a-dark-countries-screen.png" />
+      <source media="(prefers-color-scheme: light)" srcset="docs/assets/pixel9a-light-countries-screen.png" />
+      <img alt="Device screenshot of the Countries screen on a Pixel 9A" src="docs/assets/pixel9a-light-countries-screen.png" width="250px" hspace="20" />
+   </picture>
+   <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="docs/assets/pixel9a-dark-details-screen.png" />
+      <source media="(prefers-color-scheme: light)" srcset="docs/assets/pixel9a-light-details-screen.png" />
+      <img alt='Device screenshot of the "Republic of Croatia" country detail screen on a Pixel 9A' src="docs/assets/pixel9a-light-details-screen.png" width="250px" hspace="20" />
+   </picture>
 </div>
 
 ## 🌟 Features and Tech stack
