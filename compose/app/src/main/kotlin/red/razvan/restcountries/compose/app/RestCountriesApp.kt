@@ -9,13 +9,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import org.koin.androidx.compose.koinViewModel
-import org.koin.core.parameter.parametersOf
 import red.razvan.restcountries.compose.app.internal.screens.NavDestinations
 import red.razvan.restcountries.compose.app.internal.screens.NavDestinations.CountryDetailsScreen.Companion.toDestination
 import red.razvan.restcountries.compose.app.internal.screens.countries.CountriesScreen
 import red.razvan.restcountries.compose.app.internal.screens.details.CountryDetailsScreen
-import red.razvan.restcountries.compose.app.internal.screens.details.CountryDetailsScreenViewModel
 import red.razvan.restcountries.compose.design.RestCountriesTheme
 
 @Composable
@@ -41,11 +38,9 @@ fun RestCountriesApp(
 
       composable<NavDestinations.CountryDetailsScreen> { backStackEntry ->
         val destination = backStackEntry.toRoute<NavDestinations.CountryDetailsScreen>()
-        val viewModel =
-          koinViewModel<CountryDetailsScreenViewModel> { parametersOf(destination.countryId) }
 
         CountryDetailsScreen(
-          viewModel = viewModel,
+          countryId = destination.countryId,
           onNavigateUp = {
             navController.popBackStack()
           },

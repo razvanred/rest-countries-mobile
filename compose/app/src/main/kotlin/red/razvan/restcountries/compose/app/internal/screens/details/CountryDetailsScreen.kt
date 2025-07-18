@@ -26,18 +26,24 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
+import androidx.compose.material3.pulltorefresh.PullToRefreshDefaults.Indicator
+import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
+import org.koin.androidx.compose.koinViewModel
+import org.koin.core.parameter.parametersOf
 import red.razvan.restcountries.compose.app.R
 import red.razvan.restcountries.compose.app.internal.mappers.LocalNetworkFailureToMessageMapper
 import red.razvan.restcountries.compose.design.MoreOptionsVertButton
@@ -46,8 +52,25 @@ import red.razvan.restcountries.compose.design.PropertiesCard
 import red.razvan.restcountries.compose.design.Property
 import red.razvan.restcountries.compose.design.RefreshDropdownMenuItem
 import red.razvan.restcountries.compose.design.toContainerAndContentPadding
+import red.razvan.restcountries.data.models.CountryId
 import red.razvan.restcountries.data.models.Currency
 import red.razvan.restcountries.data.models.DetailedCountry
+
+@Composable
+internal fun CountryDetailsScreen(
+  countryId: CountryId,
+  onNavigateUp: () -> Unit,
+  modifier: Modifier = Modifier,
+) {
+  val viewModel =
+    koinViewModel<CountryDetailsScreenViewModel> { parametersOf(countryId) }
+
+  CountryDetailsScreen(
+    viewModel = viewModel,
+    onNavigateUp = onNavigateUp,
+    modifier = modifier,
+  )
+}
 
 @Composable
 internal fun CountryDetailsScreen(
@@ -85,6 +108,7 @@ internal fun CountryDetailsScreen(
   val snackbarHostState = remember { SnackbarHostState() }
 
   val swipeToDismissBoxState = rememberSwipeToDismissBoxState()
+  val pullToRefreshState = rememberPullToRefreshState()
 
   if (state.networkFailure != null) {
     val message = LocalNetworkFailureToMessageMapper.current.map(state.networkFailure)
@@ -152,7 +176,11 @@ internal fun CountryDetailsScreen(
             .imePadding()
             .fillMaxWidth(),
         ) {
-          Snackbar(snackbarData = data)
+          Snackbar(
+            snackbarData = data,
+            modifier = Modifier
+              .testTag("snackbar"),
+          )
         }
       }
     },
@@ -165,11 +193,22 @@ internal fun CountryDetailsScreen(
       modifier = Modifier
         .padding(containerPadding)
         .fillMaxSize(),
+      indicator = {
+        Indicator(
+          modifier = Modifier
+            .align(Alignment.TopCenter)
+            .testTag("pull-to-refresh-indicator"),
+          isRefreshing = state.isRefreshing,
+          state = pullToRefreshState,
+        )
+      },
     ) {
       if (state.country != null) {
         CountryDetailsContent(
           country = state.country,
           contentPadding = contentPadding,
+          modifier = Modifier
+            .testTag("content"),
         )
       }
     }

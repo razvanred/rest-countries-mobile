@@ -10,8 +10,6 @@ import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsNotDisplayed
 import androidx.compose.ui.test.hasScrollToIndexAction
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.compose.ui.test.onNodeWithContentDescription
-import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTouchInput
@@ -46,11 +44,34 @@ class CountriesScreenTests : KoinTest {
   @get:Rule(order = 1)
   val composeTestRule = createComposeRule()
 
-  lateinit var context: Context
+  private lateinit var context: Context
+  private lateinit var commonFinders: CommonFinders
 
   @Before
   fun before() {
     context = InstrumentationRegistry.getInstrumentation().targetContext
+    commonFinders = CommonFinders(
+      composeTestRule = composeTestRule,
+      context = context,
+    )
+  }
+
+  @Test
+  fun checkRefreshAtScreenStart() {
+    declare<ObserveCountryListItems> {
+      SampleDataObserveCountryListItems()
+    }
+    declare<RefreshCountryListItems> {
+      SuccessfulRefreshCountryListItems()
+    }
+
+    composeTestRule.setContent {
+      TestContent()
+    }
+
+    commonFinders
+      .findPullToRefreshIndicator()
+      .assertIsDisplayed()
   }
 
   @Test
@@ -79,7 +100,8 @@ class CountriesScreenTests : KoinTest {
         .assertIsDisplayed()
     }
 
-    findSnackbar()
+    commonFinders
+      .findSnackbar()
       .assertIsNotDisplayed()
   }
 
@@ -98,10 +120,8 @@ class CountriesScreenTests : KoinTest {
 
     Thread.sleep(300L)
 
-    composeTestRule
-      .onNodeWithContentDescription(
-        label = context.getString(DesignR.string.more_options_button_cd),
-      )
+    commonFinders
+      .findMoreOptionsButton()
       .performClick()
 
     composeTestRule
@@ -110,7 +130,8 @@ class CountriesScreenTests : KoinTest {
       )
       .performClick()
 
-    findPullToRefreshIndicatorNode()
+    commonFinders
+      .findPullToRefreshIndicator()
       .assertIsDisplayed()
   }
 
@@ -129,11 +150,10 @@ class CountriesScreenTests : KoinTest {
 
     Thread.sleep(300L)
 
-    composeTestRule
-      .onNode(hasScrollToIndexAction())
-      .performTouchInput { swipeDown() }
+    swipeToRefresh()
 
-    findPullToRefreshIndicatorNode()
+    commonFinders
+      .findPullToRefreshIndicator()
       .assertIsDisplayed()
   }
 
@@ -150,7 +170,8 @@ class CountriesScreenTests : KoinTest {
       TestContent()
     }
 
-    findSnackbar()
+    commonFinders
+      .findSnackbar()
       .assertIsDisplayed()
   }
 
@@ -173,10 +194,12 @@ class CountriesScreenTests : KoinTest {
       )
       .performClick()
 
-    findSnackbar()
+    commonFinders
+      .findSnackbar()
       .assertIsNotDisplayed()
 
-    findPullToRefreshIndicatorNode()
+    commonFinders
+      .findPullToRefreshIndicator()
       .assertIsDisplayed()
   }
 
@@ -192,9 +215,9 @@ class CountriesScreenTests : KoinTest {
     }
   }
 
-  private fun findPullToRefreshIndicatorNode() = composeTestRule
-    .onNodeWithTag("pull-to-refresh-indicator")
-
-  private fun findSnackbar() = composeTestRule
-    .onNodeWithTag("snackbar")
+  private fun swipeToRefresh() {
+    composeTestRule
+      .onNode(hasScrollToIndexAction())
+      .performTouchInput { swipeDown() }
+  }
 }
