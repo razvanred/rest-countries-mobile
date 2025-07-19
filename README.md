@@ -42,7 +42,7 @@ The _one and only_ Android application that displays the countries from the [RES
 - [x] Create more instrumented tests
 - [ ] Work on Compose performance optimizations
 - [ ] Migrate `:data:repository` layer to [Store](https://github.com/MobileNativeFoundation/Store)
-- [ ] Delete orphan columns from `language`, `continent`, `currency`, `capital` tables by creating a database trigger
+- [x] Delete orphan columns from `language`, `continent`, `currency`, `capital` tables by creating a database trigger
 - [ ] Move common modules to [Kotlin Multiplatform](https://www.jetbrains.com/kotlin-multiplatform/)
 - [ ] Create a proper CD pipeline
 

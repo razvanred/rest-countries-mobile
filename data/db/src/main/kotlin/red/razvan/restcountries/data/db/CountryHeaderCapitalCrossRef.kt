@@ -8,7 +8,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 
 @Entity(
-  tableName = "country_capital_cross_ref",
+  tableName = "country_header_capital_cross_ref",
   primaryKeys = ["country_header_id", "capital_name"],
   foreignKeys = [
     ForeignKey(
@@ -29,7 +29,7 @@ import androidx.room.ForeignKey
 )
 data class CountryHeaderCapitalCrossRef(
   @ColumnInfo(name = "country_header_id")
-  val countryId: CountryId,
+  val countryHeaderId: CountryId,
   @ColumnInfo(name = "capital_name")
   val capitalName: String,
 )

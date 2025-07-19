@@ -181,28 +181,28 @@ internal class DefaultCountryRepository(
     val countryHeaderLanguageCrossRefs = languages
       .map { (id) ->
         DbCountryHeaderLanguageCrossRef(
-          countryId = countryId,
+          countryHeaderId = countryId,
           languageId = id,
         )
       }
     val countryHeaderCurrencyCrossRefs = currencies
       .map { (id) ->
         DbCountryHeaderCurrencyCrossRef(
-          countryId = countryId,
+          countryHeaderId = countryId,
           currencyId = id,
         )
       }
     val countryHeaderCapitalCrossRefs = capital
       .map { (name) ->
         DbCountryHeaderCapitalCrossRef(
-          countryId = countryId,
+          countryHeaderId = countryId,
           capitalName = name,
         )
       }
     val countryHeaderContinentCrossRefs = continents
       .map { (name) ->
         DbCountryHeaderContinentCrossRef(
-          countryId = countryId,
+          countryHeaderId = countryId,
           continentName = name,
         )
       }

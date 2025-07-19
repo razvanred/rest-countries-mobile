@@ -7,14 +7,14 @@ object SampleData {
 
   object CountryHeaders {
     val Italy = CountryHeader(
-      id = red.razvan.restcountries.data.db.CountryId("ITA"),
+      id = CountryId("ITA"),
       commonName = "Italy",
       officialName = "Italian Republic",
       emojiFlag = "🇮🇹",
     )
 
     val Romania = CountryHeader(
-      id = red.razvan.restcountries.data.db.CountryId("ROU"),
+      id = CountryId("ROU"),
       commonName = "",
       officialName = "Romania",
       emojiFlag = "🇷🇴",
@@ -47,6 +47,8 @@ object SampleData {
 
     val All = _all
       .associateBy { it.id }
+
+    fun getByCountryId(countryId: CountryId) = All.getValue(countryId)
   }
 
   object CountryHeaderCapitalCrossRefs {
@@ -58,7 +60,9 @@ object SampleData {
     }
 
     val All = listOf(Italy, Romania)
-      .associateBy { (ref) -> ref.countryId }
+      .associateBy { (ref) -> ref.countryHeaderId }
+
+    fun getByCountryId(countryId: CountryId) = All.getValue(countryId)
   }
 
   object Capital {
@@ -69,25 +73,29 @@ object SampleData {
       CountryHeaders.Italy.id to Italy,
       CountryHeaders.Romania.id to Romania,
     )
+
+    fun getByCountryId(countryId: CountryId) = All.getValue(countryId)
   }
 
   object CountryHeaderCurrencyCrossRefs {
     val Italy = Currencies.Italy.map { currency ->
       CountryHeaderCurrencyCrossRef(
-        countryId = CountryHeaders.Italy.id,
+        countryHeaderId = CountryHeaders.Italy.id,
         currencyId = currency.id,
       )
     }
 
     val Romania = Currencies.Romania.map { currency ->
       CountryHeaderCurrencyCrossRef(
-        countryId = CountryHeaders.Romania.id,
+        countryHeaderId = CountryHeaders.Romania.id,
         currencyId = currency.id,
       )
     }
 
     val All = listOf(Italy, Romania)
-      .associateBy { (ref) -> ref.countryId }
+      .associateBy { (ref) -> ref.countryHeaderId }
+
+    fun getByCountryId(countryId: CountryId) = All.getValue(countryId)
   }
 
   object Currencies {
@@ -98,25 +106,29 @@ object SampleData {
       CountryHeaders.Italy.id to Italy,
       CountryHeaders.Romania.id to Romania,
     )
+
+    fun getByCountryId(countryId: CountryId) = All.getValue(countryId)
   }
 
   object CountryHeaderLanguageCrossRefs {
     val Italy = Languages.Italy.map { language ->
       CountryHeaderLanguageCrossRef(
-        countryId = CountryHeaders.Italy.id,
+        countryHeaderId = CountryHeaders.Italy.id,
         languageId = language.id,
       )
     }
 
     val Romania = Languages.Romania.map { language ->
       CountryHeaderLanguageCrossRef(
-        countryId = CountryHeaders.Romania.id,
+        countryHeaderId = CountryHeaders.Romania.id,
         languageId = language.id,
       )
     }
 
+    fun getByCountryId(countryId: CountryId) = All.getValue(countryId)
+
     val All = listOf(Italy, Romania)
-      .associateBy { (ref) -> ref.countryId }
+      .associateBy { (ref) -> ref.countryHeaderId }
   }
 
   object Languages {
@@ -127,33 +139,40 @@ object SampleData {
       CountryHeaders.Italy.id to Italy,
       CountryHeaders.Romania.id to Romania,
     )
+
+    fun getByCountryId(countryId: CountryId) = All.getValue(countryId)
   }
 
   object CountryHeaderContinentCrossRefs {
     val Italy = Continents.Italy.map { continent ->
       CountryHeaderContinentCrossRef(
-        countryId = CountryHeaders.Italy.id,
+        countryHeaderId = CountryHeaders.Italy.id,
         continentName = continent.name,
       )
     }
 
     val Romania = Continents.Romania.map { continent ->
       CountryHeaderContinentCrossRef(
-        countryId = CountryHeaders.Romania.id,
+        countryHeaderId = CountryHeaders.Romania.id,
         continentName = continent.name,
       )
     }
 
     val All = listOf(Italy, Romania)
-      .associateBy { (ref) -> ref.countryId }
+      .associateBy { (ref) -> ref.countryHeaderId }
+
+    fun getByCountryId(countryId: CountryId) = All.getValue(countryId)
   }
 
   object Continents {
     val Italy = listOf(Continent("Europe"))
     val Romania = listOf(Continent("Europe"))
+
     val All = mapOf(
       CountryHeaders.Italy.id to Italy,
       CountryHeaders.Romania.id to Romania,
     )
+
+    fun getByCountryId(countryId: CountryId) = All.getValue(countryId)
   }
 }

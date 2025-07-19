@@ -3,6 +3,7 @@
 
 package red.razvan.restcountries.data.db
 
+import androidx.annotation.VisibleForTesting
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Upsert
@@ -20,10 +21,14 @@ interface ContinentDao {
             FROM continent
             WHERE name IN (
                 SELECT continent_name
-                FROM country_continent_cross_ref
+                FROM country_header_continent_cross_ref
                 WHERE country_header_id = :countryId
             )
         """,
   )
   fun observeByCountryId(countryId: CountryId): Flow<List<Continent>>
+
+  @VisibleForTesting
+  @Query("SELECT * FROM continent")
+  suspend fun getAll(): List<Continent>
 }

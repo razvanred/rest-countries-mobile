@@ -3,10 +3,10 @@
 
 package red.razvan.restcountries.data.db
 
-import androidx.room.Room
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import assertk.assertFailure
 import assertk.assertThat
+import assertk.assertions.containsOnly
 import assertk.assertions.isEmpty
 import assertk.assertions.isEqualTo
 import assertk.assertions.isNull
@@ -16,8 +16,6 @@ import org.junit.After
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.koin.android.ext.koin.androidContext
-import org.koin.dsl.module
 import org.koin.test.KoinTest
 import org.koin.test.inject
 import red.razvan.restcountries.testresources.android.koin.KoinTestRule
@@ -25,15 +23,8 @@ import red.razvan.restcountries.testresources.android.koin.KoinTestRule
 @RunWith(AndroidJUnit4::class)
 class CountryHeaderDaoTests : KoinTest {
 
-  private val instrumentationTestModule = module {
-    single {
-      Room.inMemoryDatabaseBuilder(androidContext(), RoomAppDatabase::class.java)
-        .build()
-    }
-  }
-
   @get:Rule
-  val koinTestRule: KoinTestRule = KoinTestRule(modules = listOf(DataDbModule, instrumentationTestModule))
+  val koinTestRule: KoinTestRule = KoinTestRule(modules = listOf(DataDbModule, InMemoryDatabaseModule))
 
   private val database: RoomAppDatabase by inject()
 
@@ -63,41 +54,56 @@ class CountryHeaderDaoTests : KoinTest {
 
   @Test
   fun deleteHeader_checkDetailsCascadeDeletion() = runTest {
-    val header = SampleData.CountryHeaders.Romania
-    insertHeaderWithDetails(header)
-    insertHeaderWithDetails(SampleData.CountryHeaders.Italy)
+    val headerToDelete = SampleData.CountryHeaders.Romania
+    val headerToKeep = SampleData.CountryHeaders.Italy
 
-    countryHeaderDao.deleteById(header.id)
+    insertHeaderWithDetails(headerToDelete)
+    insertHeaderWithDetails(headerToKeep)
 
-    assertThat(countryHeaderDao.observeByIdOrNull(id = header.id).first())
+    countryHeaderDao.deleteById(headerToDelete.id)
+
+    assertThat(countryHeaderDao.observeByIdOrNull(id = headerToDelete.id).first())
       .isNull()
-    assertThat(countryDetailsDao.observeByIdOrNull(id = header.id).first())
+    assertThat(countryDetailsDao.observeByIdOrNull(id = headerToDelete.id).first())
       .isNull()
-    assertThat(currencyDao.observeByCountryId(countryId = header.id).first())
+    assertThat(currencyDao.observeByCountryId(countryId = headerToDelete.id).first())
       .isEmpty()
-    assertThat(continentDao.observeByCountryId(countryId = header.id).first())
+    assertThat(continentDao.observeByCountryId(countryId = headerToDelete.id).first())
       .isEmpty()
-    assertThat(languageDao.observeByCountryId(countryId = header.id).first())
+    assertThat(languageDao.observeByCountryId(countryId = headerToDelete.id).first())
       .isEmpty()
-    assertThat(capitalDao.observeByCountryId(countryId = header.id).first())
+    assertThat(capitalDao.observeByCountryId(countryId = headerToDelete.id).first())
       .isEmpty()
+
+    // check if the deletion triggers worked
+    assertThat(currencyDao.getAll())
+      .containsOnly(*SampleData.Currencies.getByCountryId(headerToKeep.id).toTypedArray())
+
+    assertThat(continentDao.getAll())
+      .containsOnly(*SampleData.Continents.getByCountryId(headerToKeep.id).toTypedArray())
+
+    assertThat(languageDao.getAll())
+      .containsOnly(*SampleData.Languages.getByCountryId(headerToKeep.id).toTypedArray())
+
+    assertThat(capitalDao.getAll())
+      .containsOnly(*SampleData.Capital.getByCountryId(headerToKeep.id).toTypedArray())
   }
 
   private suspend fun insertHeaderWithDetails(header: CountryHeader) {
     countryHeaderDao.insert(header)
-    countryDetailsDao.insert(SampleData.CountryDetails.All.getValue(header.id))
+    countryDetailsDao.insert(SampleData.CountryDetails.getByCountryId(header.id))
 
-    languageDao.upsert(SampleData.Languages.All.getValue(header.id))
-    countryHeaderLanguageCrossRefDao.insert(SampleData.CountryHeaderLanguageCrossRefs.All.getValue(header.id))
+    languageDao.upsert(SampleData.Languages.getByCountryId(header.id))
+    countryHeaderLanguageCrossRefDao.insert(SampleData.CountryHeaderLanguageCrossRefs.getByCountryId(header.id))
 
-    currencyDao.upsert(SampleData.Currencies.All.getValue(header.id))
-    countryHeaderCurrencyCrossRefDao.insert(SampleData.CountryHeaderCurrencyCrossRefs.All.getValue(header.id))
+    currencyDao.upsert(SampleData.Currencies.getByCountryId(header.id))
+    countryHeaderCurrencyCrossRefDao.insert(SampleData.CountryHeaderCurrencyCrossRefs.getByCountryId(header.id))
 
-    continentDao.upsert(SampleData.Continents.All.getValue(header.id))
-    countryHeaderContinentCrossRefDao.insert(SampleData.CountryHeaderContinentCrossRefs.All.getValue(header.id))
+    continentDao.upsert(SampleData.Continents.getByCountryId(header.id))
+    countryHeaderContinentCrossRefDao.insert(SampleData.CountryHeaderContinentCrossRefs.getByCountryId(header.id))
 
-    capitalDao.upsert(SampleData.Capital.All.getValue(header.id))
-    countryHeaderCapitalCrossRefDao.insert(SampleData.CountryHeaderCapitalCrossRefs.All.getValue(header.id))
+    capitalDao.upsert(SampleData.Capital.getByCountryId(header.id))
+    countryHeaderCapitalCrossRefDao.insert(SampleData.CountryHeaderCapitalCrossRefs.getByCountryId(header.id))
   }
 
   @After

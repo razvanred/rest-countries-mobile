@@ -9,7 +9,7 @@ import androidx.room.ForeignKey
 import androidx.room.ForeignKey.Companion.CASCADE
 
 @Entity(
-  tableName = "country_continent_cross_ref",
+  tableName = "country_header_continent_cross_ref",
   primaryKeys = ["country_header_id", "continent_name"],
   foreignKeys = [
     ForeignKey(
@@ -30,7 +30,7 @@ import androidx.room.ForeignKey.Companion.CASCADE
 )
 data class CountryHeaderContinentCrossRef(
   @ColumnInfo(name = "country_header_id")
-  val countryId: CountryId,
+  val countryHeaderId: CountryId,
   @ColumnInfo(name = "continent_name")
   val continentName: String,
 )

@@ -11,4 +11,7 @@ interface CountryHeaderLanguageCrossRefDao {
 
   @Insert
   suspend fun insert(refs: List<CountryHeaderLanguageCrossRef>)
+
+  @Insert
+  suspend fun insert(ref: CountryHeaderLanguageCrossRef)
 }

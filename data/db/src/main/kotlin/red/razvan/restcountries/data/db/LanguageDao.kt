@@ -3,6 +3,7 @@
 
 package red.razvan.restcountries.data.db
 
+import androidx.annotation.VisibleForTesting
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Upsert
@@ -13,6 +14,9 @@ interface LanguageDao {
 
   @Upsert
   suspend fun upsert(languages: List<Language>)
+
+  @Upsert
+  suspend fun upsert(language: Language)
 
   @Query(
     """
@@ -26,4 +30,8 @@ interface LanguageDao {
         """,
   )
   fun observeByCountryId(countryId: CountryId): Flow<List<Language>>
+
+  @VisibleForTesting
+  @Query("SELECT * FROM language")
+  suspend fun getAll(): List<Language>
 }

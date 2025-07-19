@@ -3,9 +3,12 @@
 
 package red.razvan.restcountries.data.db
 
+import android.content.Context
 import androidx.room.Database
+import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import red.razvan.restcountries.data.db.TriggerQueries.addTriggerQueries
 
 @Database(
   entities = [
@@ -36,4 +39,14 @@ abstract class RoomAppDatabase : RoomDatabase() {
   abstract val capitalDao: CapitalDao
   abstract val continentDao: ContinentDao
   abstract val countryDetailsDao: CountryDetailsDao
+
+  companion object {
+    fun inMemoryDatabaseBuilder(context: Context): Builder<RoomAppDatabase> = Room
+      .inMemoryDatabaseBuilder(context, RoomAppDatabase::class.java)
+      .addTriggerQueries()
+
+    fun databaseBuilder(context: Context): Builder<RoomAppDatabase> = Room
+      .databaseBuilder(context, RoomAppDatabase::class.java, "app.db")
+      .addTriggerQueries()
+  }
 }

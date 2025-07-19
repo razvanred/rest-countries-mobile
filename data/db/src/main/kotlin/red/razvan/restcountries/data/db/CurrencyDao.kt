@@ -3,6 +3,7 @@
 
 package red.razvan.restcountries.data.db
 
+import androidx.annotation.VisibleForTesting
 import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Upsert
@@ -13,6 +14,9 @@ interface CurrencyDao {
 
   @Upsert
   suspend fun upsert(currencies: List<Currency>)
+
+  @Upsert
+  suspend fun upsert(currency: Currency)
 
   @Query(
     """
@@ -26,4 +30,8 @@ interface CurrencyDao {
         """,
   )
   fun observeByCountryId(countryId: CountryId): Flow<List<Currency>>
+
+  @VisibleForTesting
+  @Query("SELECT * FROM currency")
+  suspend fun getAll(): List<Currency>
 }

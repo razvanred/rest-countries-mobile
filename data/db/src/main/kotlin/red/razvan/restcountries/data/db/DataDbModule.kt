@@ -3,14 +3,13 @@
 
 package red.razvan.restcountries.data.db
 
-import androidx.room.Room
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 val DataDbModule = module {
   single {
-    Room
-      .inMemoryDatabaseBuilder(androidContext(), RoomAppDatabase::class.java)
+    RoomAppDatabase
+      .inMemoryDatabaseBuilder(androidContext())
       .build()
   }
 

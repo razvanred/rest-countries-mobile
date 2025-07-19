@@ -30,7 +30,7 @@ import androidx.room.ForeignKey.Companion.CASCADE
 )
 data class CountryHeaderLanguageCrossRef(
   @ColumnInfo(name = "country_header_id")
-  val countryId: CountryId,
+  val countryHeaderId: CountryId,
   @ColumnInfo(name = "language_id")
   val languageId: LanguageId,
 )
