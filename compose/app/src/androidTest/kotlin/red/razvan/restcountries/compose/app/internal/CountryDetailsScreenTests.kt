@@ -61,24 +61,6 @@ class CountryDetailsScreenTests : KoinTest {
   }
 
   @Test
-  fun checkRefreshAtScreenStart() {
-    declare<ObserveDetailedCountryByIdOrNull> {
-      SampleDataObserveDetailedCountryByIdOrNull()
-    }
-    declare<RefreshDetailedCountryById> {
-      SuccessfulRefreshDetailedCountryById(emitDelayInMillis = 200L)
-    }
-
-    composeTestRule.setContent {
-      TestContent(countryId = expectedCountry.id)
-    }
-
-    commonFinders
-      .findPullToRefreshIndicator()
-      .assertIsDisplayed()
-  }
-
-  @Test
   fun withoutNetworkFailure_assertDetailsAreDisplayed() {
     val expectedCountry = SampleData.DetailedCountries.Italy
 

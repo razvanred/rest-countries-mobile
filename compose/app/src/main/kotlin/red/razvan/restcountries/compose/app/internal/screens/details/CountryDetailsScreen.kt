@@ -193,6 +193,7 @@ internal fun CountryDetailsScreen(
       modifier = Modifier
         .padding(containerPadding)
         .fillMaxSize(),
+      state = pullToRefreshState,
       indicator = {
         Indicator(
           modifier = Modifier

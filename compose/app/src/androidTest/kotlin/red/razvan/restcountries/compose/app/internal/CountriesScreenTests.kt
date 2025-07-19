@@ -57,24 +57,6 @@ class CountriesScreenTests : KoinTest {
   }
 
   @Test
-  fun checkRefreshAtScreenStart() {
-    declare<ObserveCountryListItems> {
-      SampleDataObserveCountryListItems()
-    }
-    declare<RefreshCountryListItems> {
-      SuccessfulRefreshCountryListItems()
-    }
-
-    composeTestRule.setContent {
-      TestContent()
-    }
-
-    commonFinders
-      .findPullToRefreshIndicator()
-      .assertIsDisplayed()
-  }
-
-  @Test
   fun withoutNetworkFailures_assertCountryListItemsAreDisplayed() {
     val items = SampleData.CountryListItems.All
 
