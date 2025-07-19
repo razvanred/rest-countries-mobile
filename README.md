@@ -18,7 +18,7 @@ The _one and only_ Android application that displays the countries from the [RES
    </picture>
 </div>
 
-## 🌟 Features and Tech stack
+## 🌟 Tech stack
 
 - Separated Gradle subprojects for each data layer
 - **Dependency Injection** through [Koin](https://github.com/InsertKoinIO/koin)
@@ -52,5 +52,6 @@ The _one and only_ Android application that displays the countries from the [RES
     about the Android development, but also shaped me as a developer in a general way
 - Although I never participated to this event, the [DroidKaigi](https://github.com/DroidKaigi) conference applications helped me
     during the early stages of my journey, and I am deeply grateful for the hard work the team is putting every year
+- [Now in Android](https://github.com/android/nowinandroid): A fully functional Android app built entirely with Kotlin and Jetpack Compose
 - All the contributors of the mentioned libraries
 - [REST Countries API contributors](https://gitlab.com/restcountries/restcountries)
