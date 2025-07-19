@@ -23,7 +23,7 @@ import androidx.room.TypeConverters
   version = 1,
   exportSchema = false,
 )
-@TypeConverters(red.razvan.restcountries.data.db.AllTypeConverters::class)
+@TypeConverters(AllTypeConverters::class)
 abstract class RoomAppDatabase : RoomDatabase() {
 
   abstract val countryHeaderDao: CountryHeaderDao

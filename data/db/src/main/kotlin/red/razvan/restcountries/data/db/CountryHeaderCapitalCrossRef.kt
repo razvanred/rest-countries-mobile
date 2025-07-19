@@ -29,7 +29,7 @@ import androidx.room.ForeignKey
 )
 data class CountryHeaderCapitalCrossRef(
   @ColumnInfo(name = "country_header_id")
-  val countryId: red.razvan.restcountries.data.db.CountryId,
+  val countryId: CountryId,
   @ColumnInfo(name = "capital_name")
   val capitalName: String,
 )

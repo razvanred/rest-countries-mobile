@@ -23,7 +23,7 @@ import androidx.room.PrimaryKey
 )
 data class CountryDetails(
   @PrimaryKey
-  val id: red.razvan.restcountries.data.db.CountryId,
+  val id: CountryId,
   @ColumnInfo(name = "svg_flag")
   val svgFlag: String,
   @ColumnInfo(name = "png_flag")

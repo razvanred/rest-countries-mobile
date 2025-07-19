@@ -22,7 +22,7 @@ interface CountryHeaderDao {
   suspend fun deleteAll()
 
   @Query("DELETE FROM country_header WHERE id = :id")
-  suspend fun deleteById(id: red.razvan.restcountries.data.db.CountryId)
+  suspend fun deleteById(id: CountryId)
 
   @Upsert
   suspend fun upsert(country: CountryHeader)
@@ -38,5 +38,5 @@ interface CountryHeaderDao {
   fun observeAll(): Flow<List<CountryHeader>>
 
   @Query("SELECT * FROM country_header WHERE id = :id")
-  fun observeByIdOrNull(id: red.razvan.restcountries.data.db.CountryId): Flow<CountryHeader?>
+  fun observeByIdOrNull(id: CountryId): Flow<CountryHeader?>
 }

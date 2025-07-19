@@ -10,7 +10,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "country_header")
 data class CountryHeader(
   @PrimaryKey
-  val id: red.razvan.restcountries.data.db.CountryId,
+  val id: CountryId,
   @ColumnInfo(name = "common_name")
   val commonName: String,
   @ColumnInfo(name = "official_name")

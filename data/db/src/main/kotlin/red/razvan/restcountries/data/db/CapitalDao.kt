@@ -25,5 +25,5 @@ interface CapitalDao {
             )
         """,
   )
-  fun observeByCountryId(countryId: red.razvan.restcountries.data.db.CountryId): Flow<List<Capital>>
+  fun observeByCountryId(countryId: CountryId): Flow<List<Capital>>
 }

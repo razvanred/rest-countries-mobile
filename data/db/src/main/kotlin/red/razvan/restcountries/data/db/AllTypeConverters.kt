@@ -7,16 +7,16 @@ import androidx.room.TypeConverter
 
 internal object AllTypeConverters {
   @TypeConverter
-  fun stringToCountryId(value: String) = red.razvan.restcountries.data.db.CountryId(value)
+  fun stringToCountryId(value: String) = CountryId(value)
 
   @TypeConverter
-  fun countryIdToString(id: red.razvan.restcountries.data.db.CountryId) = id.value
+  fun countryIdToString(id: CountryId) = id.value
 
   @TypeConverter
-  fun stringToLanguageId(value: String) = red.razvan.restcountries.data.db.LanguageId(value)
+  fun stringToLanguageId(value: String) = LanguageId(value)
 
   @TypeConverter
-  fun languageIdToString(id: red.razvan.restcountries.data.db.LanguageId) = id.value
+  fun languageIdToString(id: LanguageId) = id.value
 
   @TypeConverter
   fun intToUInt(value: Int) = value.toUInt()

@@ -25,5 +25,5 @@ interface LanguageDao {
             )
         """,
   )
-  fun observeByCountryId(countryId: red.razvan.restcountries.data.db.CountryId): Flow<List<Language>>
+  fun observeByCountryId(countryId: CountryId): Flow<List<Language>>
 }
