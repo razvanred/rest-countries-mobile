@@ -39,7 +39,7 @@ The _one and only_ Android application that displays the countries from the [RES
 ## 🛣 Roadmap for `1.0`
 
 - [x] Enhance `README.md` with device screenshots
-- [ ] Create more instrumented tests
+- [x] Create more instrumented tests
 - [ ] Work on Compose performance optimizations
 - [ ] Migrate `:data:repository` layer to [Store](https://github.com/MobileNativeFoundation/Store)
 - [ ] Delete orphan columns from `language`, `continent`, `currency`, `capital` tables by creating a database trigger

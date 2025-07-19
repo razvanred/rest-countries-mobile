@@ -33,10 +33,10 @@ object SampleData {
     val UnknownCountryId = CountryId("UNKNOWN")
 
     val Italy = DetailedCountry(
-      id = CountryId("ita"),
-      officialName = "Italian Republic",
+      id = CountryListItems.Italy.id,
+      officialName = CountryListItems.Italy.officialName,
       commonName = "Italy",
-      emojiFlag = "🇮🇹",
+      emojiFlag = CountryListItems.Italy.emojiFlag,
       flag = DetailedCountry.Flag(
         png = "",
         svg = "",
@@ -59,7 +59,34 @@ object SampleData {
       ),
     )
 
-    private val _all = listOf(Italy)
+    val Romania = DetailedCountry(
+      id = CountryListItems.Romania.id,
+      officialName = CountryListItems.Romania.officialName,
+      commonName = "",
+      emojiFlag = CountryListItems.Romania.emojiFlag,
+      flag = DetailedCountry.Flag(
+        png = "",
+        svg = "",
+        contentDescription = "Sarmale",
+      ),
+      currencies = listOf(
+        Currency(
+          id = CurrencyId("LEI"),
+          name = "Romanian leu",
+          symbol = "lei",
+        ),
+      ),
+      capital = listOf("București"),
+      continents = listOf("Europe"),
+      languages = listOf(
+        Language(
+          id = LanguageId("rou"),
+          name = "Romanian",
+        ),
+      ),
+    )
+
+    private val _all = listOf(Italy, Romania)
 
     val All = _all
       .associateBy { it.id }
