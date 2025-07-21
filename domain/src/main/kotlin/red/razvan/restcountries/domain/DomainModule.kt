@@ -4,32 +4,32 @@
 package red.razvan.restcountries.domain
 
 import org.koin.dsl.module
-import red.razvan.restcountries.data.repository.DataRepositoryModule
+import red.razvan.restcountries.data.stores.DataStoresModule
 
 val DomainModule = module {
-  includes(DataRepositoryModule)
+  includes(DataStoresModule)
 
   single<ObserveDetailedCountryByIdOrNull> {
     DefaultObserveDetailedCountryByIdOrNull(
-      repository = get(),
+      store = get(),
     )
   }
 
   single<ObserveCountryListItems> {
     DefaultObserveCountryListItems(
-      repository = get(),
+      store = get(),
     )
   }
 
   single<RefreshDetailedCountryById> {
     DefaultRefreshDetailedCountryById(
-      repository = get(),
+      store = get(),
     )
   }
 
   single<RefreshCountryListItems> {
     DefaultRefreshCountryListItems(
-      repository = get(),
+      store = get(),
     )
   }
 }

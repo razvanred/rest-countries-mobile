@@ -1,7 +1,7 @@
 // Copyright 2025 Răzvan Roșu
 // SPDX-License-Identifier: Apache-2.0
 
-package red.razvan.restcountries.data.models
+package red.razvan.restcountries.domain
 
 sealed interface InvokeStatus<out T, out E>
 

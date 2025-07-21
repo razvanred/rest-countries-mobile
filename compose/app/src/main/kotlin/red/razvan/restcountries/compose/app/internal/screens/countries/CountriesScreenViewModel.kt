@@ -11,8 +11,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import red.razvan.restcountries.data.models.InvokeStatuses
 import red.razvan.restcountries.data.models.NetworkFailure
+import red.razvan.restcountries.domain.InvokeStatuses
 import red.razvan.restcountries.domain.ObserveCountryListItems
 import red.razvan.restcountries.domain.RefreshCountryListItems
 

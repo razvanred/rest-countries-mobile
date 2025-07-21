@@ -88,6 +88,8 @@ okhttp-mockwebserver = "com.squareup.okhttp3:mockwebserver3:5.1.0"
 
 ktlint-compose-rules = "io.nlopez.compose.rules:ktlint:0.4.24"
 
+store = "org.mobilenativefoundation.store:store5:5.1.0-alpha06"
+
 # Build logic dependencies
 android-gp = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 kotlin-gp = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }

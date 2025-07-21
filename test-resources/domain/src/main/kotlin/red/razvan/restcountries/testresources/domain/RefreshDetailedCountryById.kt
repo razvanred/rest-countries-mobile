@@ -7,10 +7,10 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import red.razvan.restcountries.data.models.CountryId
-import red.razvan.restcountries.data.models.InvokeStatus
-import red.razvan.restcountries.data.models.InvokeStatuses
 import red.razvan.restcountries.data.models.NetworkFailure
 import red.razvan.restcountries.data.models.NetworkFailures
+import red.razvan.restcountries.domain.InvokeStatus
+import red.razvan.restcountries.domain.InvokeStatuses
 import red.razvan.restcountries.domain.RefreshDetailedCountryById
 
 class SuccessfulRefreshDetailedCountryById(

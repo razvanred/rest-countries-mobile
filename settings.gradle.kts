@@ -44,7 +44,7 @@ include(":data:remote")
 
 include(":data:models")
 
-include(":data:repository")
+include(":data:stores")
 
 include(":data:db")
 

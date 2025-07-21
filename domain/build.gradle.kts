@@ -13,5 +13,5 @@ android {
 dependencies {
   api(libs.koin.android)
   api(projects.data.models)
-  implementation(projects.data.repository)
+  implementation(projects.data.stores)
 }

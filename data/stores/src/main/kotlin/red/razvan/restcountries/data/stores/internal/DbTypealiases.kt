@@ -1,7 +1,7 @@
 // Copyright 2025 Răzvan Roșu
 // SPDX-License-Identifier: Apache-2.0
 
-package red.razvan.restcountries.data.repository.internal
+package red.razvan.restcountries.data.stores.internal
 
 import red.razvan.restcountries.data.db.Capital
 import red.razvan.restcountries.data.db.Continent
@@ -19,7 +19,7 @@ import red.razvan.restcountries.data.db.LanguageId
 
 internal typealias DbCountryHeader = CountryHeader
 internal typealias DbCountryDetails = CountryDetails
-internal typealias DbCountryId = red.razvan.restcountries.data.db.CountryId
+internal typealias DbCountryId = CountryId
 internal typealias DbCapital = Capital
 internal typealias DbContinent = Continent
 internal typealias DbLanguageId = LanguageId

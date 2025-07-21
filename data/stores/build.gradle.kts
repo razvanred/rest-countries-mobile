@@ -7,12 +7,13 @@ plugins {
 }
 
 android {
-  namespace = "red.razvan.restcountries.data.repository"
+  namespace = "red.razvan.restcountries.data.stores"
 }
 
 dependencies {
   api(projects.data.models)
   api(libs.koin.android)
+  api(libs.store)
 
   implementation(projects.data.db)
   implementation(projects.data.remote)

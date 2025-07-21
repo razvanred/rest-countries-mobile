@@ -1,7 +1,7 @@
 // Copyright 2025 Răzvan Roșu
 // SPDX-License-Identifier: Apache-2.0
 
-package red.razvan.restcountries.data.repository.internal
+package red.razvan.restcountries.data.stores.internal
 
 import red.razvan.restcountries.core.utils.Mapper
 import red.razvan.restcountries.data.models.CountryId
