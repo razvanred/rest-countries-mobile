@@ -26,6 +26,7 @@ The _one and only_ Android application that displays the countries from the [RES
 - **Remote fetching** from the REST API through [Ktor Client](https://github.com/ktorio/ktor)
 - **Data serialization** through [Kotlinx Serialization](https://github.com/Kotlin/kotlinx.serialization)
 - **Caching on a local database** with [AndroidX Room](https://developer.android.com/jetpack/androidx/releases/room)
+- **Different data layer handling** through [Store](https://github.com/MobileNativeFoundation/Store)
 - **UI** implemented using [Jetpack Compose](https://developer.android.com/compose), with a separated Design System module
 - Network errors clearly propagated through layers and displayed to the user
 - **Screenshot testing** with [Paparazzi](https://github.com/cashapp/paparazzi)
