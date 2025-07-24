@@ -45,6 +45,8 @@ The _one and only_ Android application that displays the countries from the [RES
 - [x] Migrate `:data:repository` layer to [Store](https://github.com/MobileNativeFoundation/Store)
 - [x] Delete orphan columns from `language`, `continent`, `currency`, `capital` tables by creating a database trigger
 - [ ] Move common modules to [Kotlin Multiplatform](https://www.jetbrains.com/kotlin-multiplatform/)
+- [ ] Create iOS application & UI implementation with [SwiftUI](https://developer.apple.com/swiftui/)
+- [ ] Validate external libraries licenses through [Licensee](https://github.com/cashapp/licensee)
 - [ ] Create a proper CD pipeline
 
 ## 💟 Huge thanks to…
