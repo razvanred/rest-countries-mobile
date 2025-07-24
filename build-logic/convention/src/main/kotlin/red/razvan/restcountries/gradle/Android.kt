@@ -6,13 +6,9 @@ package red.razvan.restcountries.gradle
 import com.android.build.api.dsl.ManagedVirtualDevice
 import com.android.build.gradle.BaseExtension
 import org.gradle.api.Project
-import org.gradle.api.tasks.testing.Test
-import org.gradle.api.tasks.testing.logging.TestExceptionFormat
-import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.dependencies
-import org.gradle.kotlin.dsl.withType
 
 internal fun Project.configureAndroid() {
   android {
@@ -34,16 +30,6 @@ internal fun Project.configureAndroid() {
         apiLevel = 35
         systemImageSource = "aosp-atd"
       }
-    }
-  }
-
-  tasks.withType<Test> {
-    testLogging {
-      events(TestLogEvent.FAILED, TestLogEvent.STANDARD_ERROR, TestLogEvent.SKIPPED)
-      exceptionFormat = TestExceptionFormat.FULL
-      showExceptions = true
-      showCauses = true
-      showStackTraces = true
     }
   }
 

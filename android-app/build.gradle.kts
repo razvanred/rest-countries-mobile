@@ -20,7 +20,7 @@ android {
   }
 
   defaultConfig {
-    applicationId = "red.razvan.restcountries.android.app"
+    applicationId = "red.razvan.restcountries"
     versionCode = 1
     versionName = "1.0"
 
