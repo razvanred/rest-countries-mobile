@@ -54,7 +54,7 @@ class CountryHeaderDaoTests : KoinTest {
 
   @Test
   fun deleteHeader_checkDetailsCascadeDeletion() = runTest {
-    val headerToDelete = SampleData.CountryHeaders.Romania
+    val headerToDelete = SampleData.CountryHeaders.Australia
     val headerToKeep = SampleData.CountryHeaders.Italy
 
     insertHeaderWithDetails(headerToDelete)

@@ -5,22 +5,35 @@ package red.razvan.restcountries.data.db
 
 object SampleData {
 
+  object CountryIds {
+    val Italy = CountryId("ITA")
+    val Romania = CountryId("ROU")
+    val Australia = CountryId("AUS")
+  }
+
   object CountryHeaders {
     val Italy = CountryHeader(
-      id = CountryId("ITA"),
+      id = CountryIds.Italy,
       commonName = "Italy",
       officialName = "Italian Republic",
       emojiFlag = "🇮🇹",
     )
 
     val Romania = CountryHeader(
-      id = CountryId("ROU"),
+      id = CountryIds.Romania,
       commonName = "",
       officialName = "Romania",
       emojiFlag = "🇷🇴",
     )
 
-    private val _all = listOf(Italy, Romania)
+    val Australia = CountryHeader(
+      id = CountryIds.Australia,
+      commonName = "Australia",
+      officialName = "Commonwealth of Australia",
+      emojiFlag = "🇦🇺",
+    )
+
+    private val _all = listOf(Italy, Romania, Australia)
 
     val All = _all
       .associateBy { it.id }
@@ -28,7 +41,7 @@ object SampleData {
 
   object CountryDetails {
     val Italy = CountryDetails(
-      id = CountryHeaders.Italy.id,
+      id = CountryIds.Italy,
       svgFlag = "https://www.example.org/test.svg",
       pngFlag = "https://www.example.com/test.png",
       flagContentDescription = "alt",
@@ -36,14 +49,22 @@ object SampleData {
     )
 
     val Romania = CountryDetails(
-      id = CountryHeaders.Romania.id,
+      id = CountryIds.Romania,
       svgFlag = "https://www.example.org/test.svg",
       pngFlag = "https://www.example.com/test.png",
       flagContentDescription = "alt",
       population = 3_400U,
     )
 
-    private val _all = listOf(Italy, Romania)
+    val Australia = CountryDetails(
+      id = CountryIds.Australia,
+      svgFlag = "https://www.example.org/test.svg",
+      pngFlag = "https://www.example.com/test.png",
+      flagContentDescription = "alt",
+      population = 25687041U,
+    )
+
+    private val _all = listOf(Italy, Romania, Australia)
 
     val All = _all
       .associateBy { it.id }
@@ -52,127 +73,112 @@ object SampleData {
   }
 
   object CountryHeaderCapitalCrossRefs {
-    val Italy = Capital.Italy.map { capital ->
-      CountryHeaderCapitalCrossRef(CountryHeaders.Italy.id, capital.name)
-    }
-    val Romania = Capital.Romania.map { capital ->
-      CountryHeaderCapitalCrossRef(CountryHeaders.Romania.id, capital.name)
-    }
+    val Italy = getByCountryId(CountryIds.Italy)
+    val Romania = getByCountryId(CountryIds.Romania)
+    val Australia = getByCountryId(CountryIds.Australia)
 
-    val All = listOf(Italy, Romania)
-      .associateBy { (ref) -> ref.countryHeaderId }
-
-    fun getByCountryId(countryId: CountryId) = All.getValue(countryId)
+    fun getByCountryId(countryId: CountryId) = Capital
+      .getByCountryId(countryId)
+      .map { capital ->
+        CountryHeaderCapitalCrossRef(
+          countryHeaderId = countryId,
+          capitalName = capital.name,
+        )
+      }
   }
 
   object Capital {
-    val Italy = listOf(Capital("Rome"))
-    val Romania = listOf(Capital("București"))
+    val Rome = Capital("Rome")
+    val Bucharest = Capital("București")
+    val Canberra = Capital("Canberra")
 
-    val All = mapOf(
-      CountryHeaders.Italy.id to Italy,
-      CountryHeaders.Romania.id to Romania,
-    )
-
-    fun getByCountryId(countryId: CountryId) = All.getValue(countryId)
+    fun getByCountryId(countryId: CountryId) = when (countryId) {
+      CountryIds.Italy -> listOf(Rome)
+      CountryIds.Romania -> listOf(Bucharest)
+      CountryIds.Australia -> listOf(Canberra)
+      else -> error("Capital not available for countryId = $countryId")
+    }
   }
 
   object CountryHeaderCurrencyCrossRefs {
-    val Italy = Currencies.Italy.map { currency ->
-      CountryHeaderCurrencyCrossRef(
-        countryHeaderId = CountryHeaders.Italy.id,
-        currencyId = currency.id,
-      )
-    }
+    val Italy = getByCountryId(CountryIds.Italy)
+    val Romania = getByCountryId(CountryIds.Romania)
+    val Australia = getByCountryId(CountryIds.Australia)
 
-    val Romania = Currencies.Romania.map { currency ->
-      CountryHeaderCurrencyCrossRef(
-        countryHeaderId = CountryHeaders.Romania.id,
-        currencyId = currency.id,
-      )
-    }
-
-    val All = listOf(Italy, Romania)
-      .associateBy { (ref) -> ref.countryHeaderId }
-
-    fun getByCountryId(countryId: CountryId) = All.getValue(countryId)
+    fun getByCountryId(countryId: CountryId) = Currencies
+      .getByCountryId(countryId)
+      .map { currency ->
+        CountryHeaderCurrencyCrossRef(
+          countryHeaderId = countryId,
+          currencyId = currency.id,
+        )
+      }
   }
 
   object Currencies {
-    val Italy = listOf(Currency(id = CurrencyId("EUR"), name = "Euro", symbol = "€"))
-    val Romania = listOf(Currency(id = CurrencyId("LEU"), name = "Leu", symbol = "lei"))
+    val Euro = Currency(id = CurrencyId("EUR"), name = "Euro", symbol = "€")
+    val Leu = Currency(id = CurrencyId("LEU"), name = "Leu", symbol = "lei")
+    val AustralianDollar =
+      Currency(id = CurrencyId("AUD"), name = "Australian dollar", symbol = "$")
 
-    val All = mapOf(
-      CountryHeaders.Italy.id to Italy,
-      CountryHeaders.Romania.id to Romania,
-    )
-
-    fun getByCountryId(countryId: CountryId) = All.getValue(countryId)
+    fun getByCountryId(countryId: CountryId) = when (countryId) {
+      CountryHeaders.Italy.id -> listOf(Euro)
+      CountryHeaders.Romania.id -> listOf(Leu)
+      CountryHeaders.Australia.id -> listOf(AustralianDollar)
+      else -> error("Currency not found for countryId = $countryId")
+    }
   }
 
   object CountryHeaderLanguageCrossRefs {
-    val Italy = Languages.Italy.map { language ->
-      CountryHeaderLanguageCrossRef(
-        countryHeaderId = CountryHeaders.Italy.id,
-        languageId = language.id,
-      )
-    }
+    val Italy = getByCountryId(CountryHeaders.Italy.id)
+    val Romania = getByCountryId(CountryHeaders.Romania.id)
+    val Australia = getByCountryId(CountryHeaders.Australia.id)
 
-    val Romania = Languages.Romania.map { language ->
-      CountryHeaderLanguageCrossRef(
-        countryHeaderId = CountryHeaders.Romania.id,
-        languageId = language.id,
-      )
-    }
-
-    fun getByCountryId(countryId: CountryId) = All.getValue(countryId)
-
-    val All = listOf(Italy, Romania)
-      .associateBy { (ref) -> ref.countryHeaderId }
+    fun getByCountryId(countryId: CountryId) = Languages.getByCountryId(countryId)
+      .map { language ->
+        CountryHeaderLanguageCrossRef(
+          countryHeaderId = countryId,
+          languageId = language.id,
+        )
+      }
   }
 
   object Languages {
-    val Italy = listOf(Language(id = LanguageId("IT"), name = "Italiano"))
-    val Romania = listOf(Language(id = LanguageId("RO"), name = "Română"))
+    val Italian = Language(id = LanguageId("IT"), name = "Italiano")
+    val Romanian = Language(id = LanguageId("RO"), name = "Română")
+    val English = Language(id = LanguageId("eng"), name = "English")
 
-    val All = mapOf(
-      CountryHeaders.Italy.id to Italy,
-      CountryHeaders.Romania.id to Romania,
-    )
-
-    fun getByCountryId(countryId: CountryId) = All.getValue(countryId)
+    fun getByCountryId(countryId: CountryId): List<Language> = when (countryId) {
+      CountryHeaders.Italy.id -> listOf(Italian)
+      CountryHeaders.Romania.id -> listOf(Romanian)
+      CountryHeaders.Australia.id -> listOf(English)
+      else -> error("Languages not defined for countryId = $countryId")
+    }
   }
 
   object CountryHeaderContinentCrossRefs {
-    val Italy = Continents.Italy.map { continent ->
-      CountryHeaderContinentCrossRef(
-        countryHeaderId = CountryHeaders.Italy.id,
-        continentName = continent.name,
-      )
-    }
+    val Italy = getByCountryId(CountryIds.Italy)
+    val Romania = getByCountryId(CountryIds.Romania)
+    val Australia = getByCountryId(CountryIds.Australia)
 
-    val Romania = Continents.Romania.map { continent ->
-      CountryHeaderContinentCrossRef(
-        countryHeaderId = CountryHeaders.Romania.id,
-        continentName = continent.name,
-      )
-    }
-
-    val All = listOf(Italy, Romania)
-      .associateBy { (ref) -> ref.countryHeaderId }
-
-    fun getByCountryId(countryId: CountryId) = All.getValue(countryId)
+    fun getByCountryId(countryId: CountryId) = Continents
+      .getByCountryId(countryId)
+      .map { continent ->
+        CountryHeaderContinentCrossRef(
+          countryHeaderId = countryId,
+          continentName = continent.name,
+        )
+      }
   }
 
   object Continents {
-    val Italy = listOf(Continent("Europe"))
-    val Romania = listOf(Continent("Europe"))
+    val Europe = Continent("Europe")
+    val Oceania = Continent("Australia")
 
-    val All = mapOf(
-      CountryHeaders.Italy.id to Italy,
-      CountryHeaders.Romania.id to Romania,
-    )
-
-    fun getByCountryId(countryId: CountryId) = All.getValue(countryId)
+    fun getByCountryId(countryId: CountryId) = when (countryId) {
+      CountryHeaders.Italy.id, CountryHeaders.Romania.id -> listOf(Europe)
+      CountryHeaders.Australia.id -> listOf(Oceania)
+      else -> error("Continents not defined for countryId = $countryId")
+    }
   }
 }
