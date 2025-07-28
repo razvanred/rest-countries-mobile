@@ -9,33 +9,33 @@ The _one and only_ Android application that displays the countries from the [RES
    <picture>
       <source media="(prefers-color-scheme: dark)" srcset="docs/assets/pixel9a-dark-countries-screen.png" />
       <source media="(prefers-color-scheme: light)" srcset="docs/assets/pixel9a-light-countries-screen.png" />
-      <img alt="Device screenshot of the Countries screen on a Pixel 9A" src="docs/assets/pixel9a-light-countries-screen.png" width="250px" hspace="20" />
+      <img alt="Device screenshot of the Countries screen on a Pixel 9A" src="docs/assets/pixel9a-light-countries-screen.png" width="250px" hspace="20" vspace="250px" />
    </picture>
    <picture>
       <source media="(prefers-color-scheme: dark)" srcset="docs/assets/pixel9a-dark-details-screen.png" />
       <source media="(prefers-color-scheme: light)" srcset="docs/assets/pixel9a-light-details-screen.png" />
-      <img alt='Device screenshot of the "Republic of Croatia" country detail screen on a Pixel 9A' src="docs/assets/pixel9a-light-details-screen.png" width="250px" hspace="20" />
+      <img alt='Device screenshot of the "Republic of Croatia" country detail screen on a Pixel 9A' src="docs/assets/pixel9a-light-details-screen.png" width="250px" hspace="20" vspace="250px" />
    </picture>
 </div>
 
 ## 🌟 Tech stack
 
-- Separated Gradle subprojects for each data layer
-- **Dependency Injection** through [Koin](https://github.com/InsertKoinIO/koin)
-- **Async calls and Reactive Flows** through [Kotlinx Coroutines](https://github.com/Kotlin/kotlinx.coroutines)
-- **Remote fetching** from the REST API through [Ktor Client](https://github.com/ktorio/ktor)
-- **Data serialization** through [Kotlinx Serialization](https://github.com/Kotlin/kotlinx.serialization)
-- **Caching on a local database** with [AndroidX Room](https://developer.android.com/jetpack/androidx/releases/room)
-- **Different data layer handling** through [Store](https://github.com/MobileNativeFoundation/Store)
-- **UI** implemented using [Jetpack Compose](https://developer.android.com/compose), with a separated Design System module
-- Network errors clearly propagated through layers and displayed to the user
-- **Screenshot testing** with [Paparazzi](https://github.com/cashapp/paparazzi)
-- **Unit tests** using:
+- 🛂 Separated Gradle subprojects for each data layer
+- 💉 **Dependency Injection** through [Koin](https://github.com/InsertKoinIO/koin)
+- 🌊 **Async calls and Reactive Flows** through [Kotlinx Coroutines](https://github.com/Kotlin/kotlinx.coroutines)
+- 🌍 **Remote fetching** from the REST API through [Ktor Client](https://github.com/ktorio/ktor)
+- 📄 **Data serialization** through [Kotlinx Serialization](https://github.com/Kotlin/kotlinx.serialization)
+- 🍔 **Caching on a local database** with [AndroidX Room](https://developer.android.com/jetpack/androidx/releases/room)
+- 📦 **Different data layer handling** through [Store](https://github.com/MobileNativeFoundation/Store)
+- 🎨 **UI** implemented using [Jetpack Compose](https://developer.android.com/compose), with a separated Design System module
+- ❗️ Network errors clearly propagated through layers and displayed to the user
+- 📸 **Screenshot testing** with [Paparazzi](https://github.com/cashapp/paparazzi)
+- ⚙️ **Unit tests** using:
   - [JUnit4](https://github.com/junit-team/junit4)
   - [AssertK](https://github.com/willowtreeapps/assertk)
   - [Turbine](https://github.com/cashapp/turbine)
-- [Instrumented tests](https://developer.android.com/training/testing/instrumented-tests)
-- **Shared build logic** between subprojects through [convention plugins](https://docs.gradle.org/current/samples/sample_convention_plugins.html)
+- 🦾 [Instrumented tests](https://developer.android.com/training/testing/instrumented-tests)
+- 🧩 **Shared build logic** between subprojects through [convention plugins](https://docs.gradle.org/current/samples/sample_convention_plugins.html)
 
 ## 🛣 Roadmap for `1.0`
 
