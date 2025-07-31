@@ -30,7 +30,7 @@ androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", versi
 
 androidx-test-runner = { module = "androidx.test:runner", version = "1.6.2" }
 androidx-test-rules = { module = "androidx.test:rules", version = "1.6.1" }
-androidx-test-core-ktx = { group = "androidx.test", name = "core-ktx", version = "1.6.1" }
+androidx-test-core-ktx = { group = "androidx.test", name = "core-ktx", version = "1.7.0" }
 
 android-material = "com.google.android.material:material:1.12.0"
 android-tools-desugar = { group = "com.android.tools", name = "desugar_jdk_libs", version = "2.1.5" }
