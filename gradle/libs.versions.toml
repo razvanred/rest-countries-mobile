@@ -29,7 +29,7 @@ androidx-activity-compose = { group = "androidx.activity", name = "activity-comp
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
 
 androidx-test-runner = { module = "androidx.test:runner", version = "1.7.0" }
-androidx-test-rules = { module = "androidx.test:rules", version = "1.6.1" }
+androidx-test-rules = { module = "androidx.test:rules", version = "1.7.0" }
 androidx-test-core-ktx = { group = "androidx.test", name = "core-ktx", version = "1.7.0" }
 
 android-material = "com.google.android.material:material:1.12.0"
