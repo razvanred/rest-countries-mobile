@@ -3,12 +3,11 @@
 
 package red.razvan.restcountries.data.db
 
-import android.content.Context
+import androidx.room.ConstructedBy
 import androidx.room.Database
-import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.RoomDatabaseConstructor
 import androidx.room.TypeConverters
-import red.razvan.restcountries.data.db.TriggerQueries.addTriggerQueries
 
 @Database(
   entities = [
@@ -26,6 +25,7 @@ import red.razvan.restcountries.data.db.TriggerQueries.addTriggerQueries
   version = 1,
   exportSchema = false,
 )
+@ConstructedBy(RoomAppDatabaseConstructor::class)
 @TypeConverters(AllTypeConverters::class)
 abstract class RoomAppDatabase : RoomDatabase() {
 
@@ -39,14 +39,9 @@ abstract class RoomAppDatabase : RoomDatabase() {
   abstract val capitalDao: CapitalDao
   abstract val continentDao: ContinentDao
   abstract val countryDetailsDao: CountryDetailsDao
+}
 
-  companion object {
-    fun inMemoryDatabaseBuilder(context: Context): Builder<RoomAppDatabase> = Room
-      .inMemoryDatabaseBuilder(context, RoomAppDatabase::class.java)
-      .addTriggerQueries()
-
-    fun databaseBuilder(context: Context): Builder<RoomAppDatabase> = Room
-      .databaseBuilder(context, RoomAppDatabase::class.java, "app.db")
-      .addTriggerQueries()
-  }
+// The Room compiler generates the `actual` implementations.
+expect object RoomAppDatabaseConstructor : RoomDatabaseConstructor<RoomAppDatabase> {
+  override fun initialize(): RoomAppDatabase
 }

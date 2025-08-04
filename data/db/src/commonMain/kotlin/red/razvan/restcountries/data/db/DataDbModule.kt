@@ -3,15 +3,10 @@
 
 package red.razvan.restcountries.data.db
 
-import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
 val DataDbModule = module {
-  single {
-    RoomAppDatabase
-      .inMemoryDatabaseBuilder(androidContext())
-      .build()
-  }
+  includes(PlatformModule)
 
   single {
     get<RoomAppDatabase>().countryHeaderDao

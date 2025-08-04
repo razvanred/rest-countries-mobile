@@ -3,13 +3,12 @@
 
 package red.razvan.restcountries.data.db
 
-import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
-val InMemoryDatabaseModule = module {
+internal actual val PlatformModule = module {
   single {
-    AndroidRoomAppDatabase
-      .inMemoryDatabaseBuilder(androidContext())
+    AppleRoomAppDatabase
+      .databaseBuilder()
       .build()
   }
 }

@@ -55,6 +55,7 @@ include(":domain")
 include(":core:utils")
 
 include(":commons:kotlinx-coroutines")
+include(":commons:intellij-annotations")
 
 include(":test-resources:domain")
 include(":test-resources:android-koin")
