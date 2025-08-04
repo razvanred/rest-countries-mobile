@@ -3,6 +3,8 @@
 
 package red.razvan.restcountries.domain
 
+import kotlin.jvm.JvmInline
+
 sealed interface InvokeStatus<out T, out E>
 
 object InvokeStatuses {
