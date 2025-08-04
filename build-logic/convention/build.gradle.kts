@@ -59,6 +59,11 @@ gradlePlugin {
       implementationClass = "red.razvan.restcountries.gradle.KotlinAndroidConventionPlugin"
     }
 
+    register("kotlinMultiplatform") {
+      id = "red.razvan.restcountries.kotlin.multiplatform"
+      implementationClass = "red.razvan.restcountries.gradle.KotlinMultiplatformConventionPlugin"
+    }
+
     register("androidApplicationCompose") {
       id = "red.razvan.restcountries.android.application.compose"
       implementationClass = "red.razvan.restcountries.gradle.AndroidApplicationComposeConventionPlugin"

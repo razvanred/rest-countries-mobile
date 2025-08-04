@@ -3,7 +3,9 @@
 
 package red.razvan.restcountries.data.db
 
+import kotlin.jvm.JvmInline
+
 @JvmInline
-value class CurrencyId(
+value class LanguageId(
   val value: String,
 )

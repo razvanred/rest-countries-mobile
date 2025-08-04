@@ -3,7 +3,6 @@
 
 package red.razvan.restcountries.data.db
 
-@JvmInline
-value class LanguageId(
-  val value: String,
-)
+import org.koin.core.module.Module
+
+internal expect val PlatformModule: Module

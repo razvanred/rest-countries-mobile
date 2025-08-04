@@ -3,14 +3,14 @@
 
 package red.razvan.restcountries.data.db
 
-import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.sqlite.db.SupportSQLiteDatabase
-import org.intellij.lang.annotations.Language
+import androidx.sqlite.SQLiteConnection
+import androidx.sqlite.execSQL
+import red.razvan.restcountries.intellij.annotations.FormatLanguage
 
 internal object TriggerQueries {
 
-  @Language("RoomSql")
+  @FormatLanguage(value = "RoomSql")
   private const val DELETE_ORPHANED_CAPITAL = """
     CREATE TRIGGER delete_orphaned_capital
     AFTER DELETE ON country_header_capital_cross_ref
@@ -25,7 +25,7 @@ internal object TriggerQueries {
     END;
   """
 
-  @Language("RoomSql")
+  @FormatLanguage("RoomSql")
   private const val DELETE_ORPHANED_CONTINENTS = """
     CREATE TRIGGER delete_orphaned_continents
     AFTER DELETE ON country_header_continent_cross_ref
@@ -40,7 +40,7 @@ internal object TriggerQueries {
     END;
   """
 
-  @Language("RoomSql")
+  @FormatLanguage("RoomSql")
   private const val DELETE_ORPHANED_CURRENCIES = """
     CREATE TRIGGER delete_orphaned_curriencies
     AFTER DELETE ON country_header_currency_cross_ref
@@ -55,7 +55,7 @@ internal object TriggerQueries {
     END;
   """
 
-  @Language("RoomSql")
+  @FormatLanguage("RoomSql")
   private const val DELETE_ORPHANED_LANGUAGES = """
     CREATE TRIGGER delete_orphaned_languages
     AFTER DELETE ON country_header_language_cross_ref
@@ -72,13 +72,13 @@ internal object TriggerQueries {
 
   fun <T : RoomDatabase> RoomDatabase.Builder<T>.addTriggerQueries() = addCallback(
     object : RoomDatabase.Callback() {
-      override fun onCreate(db: SupportSQLiteDatabase) {
-        super.onCreate(db)
+      override fun onCreate(connection: SQLiteConnection) {
+        super.onCreate(connection)
 
-        db.execSQL(DELETE_ORPHANED_CAPITAL)
-        db.execSQL(DELETE_ORPHANED_LANGUAGES)
-        db.execSQL(DELETE_ORPHANED_CONTINENTS)
-        db.execSQL(DELETE_ORPHANED_CURRENCIES)
+        connection.execSQL(DELETE_ORPHANED_CAPITAL)
+        connection.execSQL(DELETE_ORPHANED_LANGUAGES)
+        connection.execSQL(DELETE_ORPHANED_CONTINENTS)
+        connection.execSQL(DELETE_ORPHANED_CURRENCIES)
       }
     },
   )
