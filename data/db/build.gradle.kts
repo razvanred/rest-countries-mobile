@@ -36,6 +36,23 @@ kotlin {
         implementation(libs.room.ktx)
       }
     }
+
+    val androidInstrumentedTest by getting {
+      dependencies {
+        implementation(projects.testResources.androidKoin)
+        implementation(libs.androidx.test.ext.junit.ktx)
+
+        implementation(libs.assertk)
+        implementation(libs.assertk.coroutines)
+
+        implementation(libs.kotlinx.coroutines.test)
+
+        implementation(libs.turbine)
+
+        implementation(libs.koin.test)
+        implementation(libs.koin.test.junit4)
+      }
+    }
   }
 }
 
@@ -43,19 +60,4 @@ dependencies {
   add("kspAndroid", libs.room.compiler)
   add("kspIosArm64", libs.room.compiler)
   add("kspIosSimulatorArm64", libs.room.compiler)
-
-  // region Testing
-  androidTestImplementation(projects.testResources.androidKoin)
-  androidTestImplementation(libs.androidx.test.ext.junit.ktx)
-
-  androidTestImplementation(libs.assertk)
-  androidTestImplementation(libs.assertk.coroutines)
-
-  androidTestImplementation(libs.kotlinx.coroutines.test)
-
-  androidTestImplementation(libs.turbine)
-
-  androidTestImplementation(libs.koin.test)
-  androidTestImplementation(libs.koin.test.junit4)
-  // endregion
 }
