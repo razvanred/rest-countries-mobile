@@ -16,3 +16,5 @@ kotlinc.xml
 deviceManager.xml
 androidTestResultsUserPreferences.xml
 /artifacts/
+/runConfigurations/RestCountries.xml
+/xcode.xml
