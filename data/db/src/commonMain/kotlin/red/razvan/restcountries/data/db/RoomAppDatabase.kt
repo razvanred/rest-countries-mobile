@@ -8,6 +8,8 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.RoomDatabaseConstructor
 import androidx.room.TypeConverters
+import androidx.sqlite.driver.bundled.BundledSQLiteDriver
+import red.razvan.restcountries.data.db.TriggerQueries.addTriggerQueries
 
 @Database(
   entities = [
@@ -42,6 +44,15 @@ abstract class RoomAppDatabase : RoomDatabase() {
 }
 
 // The Room compiler generates the `actual` implementations.
-expect object RoomAppDatabaseConstructor : RoomDatabaseConstructor<RoomAppDatabase> {
+internal expect object RoomAppDatabaseConstructor : RoomDatabaseConstructor<RoomAppDatabase> {
   override fun initialize(): RoomAppDatabase
+}
+
+internal class RoomAppDatabaseFactory(
+  private val builder: RoomDatabase.Builder<RoomAppDatabase>,
+) {
+  fun create(): RoomAppDatabase = builder
+    .setDriver(BundledSQLiteDriver())
+    .addTriggerQueries()
+    .build()
 }
