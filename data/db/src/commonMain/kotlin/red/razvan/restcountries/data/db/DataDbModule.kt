@@ -3,10 +3,20 @@
 
 package red.razvan.restcountries.data.db
 
+import androidx.room.RoomDatabase
+import org.koin.core.parameter.ParametersHolder
+import org.koin.core.scope.Scope
 import org.koin.dsl.module
 
 val DataDbModule = module {
-  includes(PlatformModule)
+  single {
+    getDatabaseBuilder(it)
+  }
+
+  single { params ->
+    RoomAppDatabaseFactory(get())
+      .create()
+  }
 
   single {
     get<RoomAppDatabase>().countryHeaderDao
@@ -54,3 +64,5 @@ val DataDbModule = module {
     get<RoomAppDatabase>().countryDetailsDao
   }
 }
+
+internal expect fun Scope.getDatabaseBuilder(params: ParametersHolder): RoomDatabase.Builder<RoomAppDatabase>

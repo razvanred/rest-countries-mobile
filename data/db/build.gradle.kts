@@ -27,6 +27,7 @@ kotlin {
         api(libs.room.runtime)
 
         implementation(projects.commons.intellijAnnotations)
+        implementation(libs.sqlite.bundled)
       }
     }
 

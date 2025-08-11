@@ -9,12 +9,10 @@ import kotlinx.cinterop.ExperimentalForeignApi
 import platform.Foundation.NSDocumentDirectory
 import platform.Foundation.NSFileManager
 import platform.Foundation.NSUserDomainMask
-import red.razvan.restcountries.data.db.TriggerQueries.addTriggerQueries
 
 object AppleRoomAppDatabase {
   fun inMemoryDatabaseBuilder(): RoomDatabase.Builder<RoomAppDatabase> = Room
     .inMemoryDatabaseBuilder<RoomAppDatabase>()
-    .addTriggerQueries()
 
   fun databaseBuilder(): RoomDatabase.Builder<RoomAppDatabase> = Room
     .databaseBuilder(name = "$documentDirectory/app.db")

@@ -10,6 +10,5 @@ val InMemoryDatabaseModule = module {
   single {
     AndroidRoomAppDatabase
       .inMemoryDatabaseBuilder(androidContext())
-      .build()
   }
 }
