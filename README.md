@@ -39,6 +39,7 @@ The _one and only_ Android application that displays the countries from the [RES
 ### 🤖 Android application
 
 - 🎨 **UI** implemented using [Jetpack Compose](https://developer.android.com/compose), with a separated Design System module
+- 🖼️ **Image loading** through [Coil](https://github.com/coil-kt/coil)
 - 📸 **Screenshot testing** using [Paparazzi](https://github.com/cashapp/paparazzi)
 - 🧪 **Unit tests** using [JUnit4](https://github.com/junit-team/junit4)
 - 🦾 [Instrumented tests](https://developer.android.com/training/testing/instrumented-tests) with:
@@ -48,7 +49,8 @@ The _one and only_ Android application that displays the countries from the [RES
 ###  iOS application
 
 - 🎨 **UI** implemented using [SwiftUI](https://developer.apple.com/swiftui/)
-- 📦 **Dependencies management** through [Swift Package Manager](https://github.com/swiftlang/swift-package-manager)
+- 💉 **Dependency Injection** through [Needle](https://github.com/uber/needle)
+- 📦 **Remote dependencies management** through [Swift Package Manager](https://github.com/swiftlang/swift-package-manager)
 - 🧰 **Xcode configuration files management** through [Tuist](https://github.com/tuist/tuist)
 
 ## 🛣 Roadmap for `1.0`
