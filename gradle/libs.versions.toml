@@ -108,6 +108,6 @@ kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref =
 
 paparazzi = { id = "app.cash.paparazzi", version = "2.0.0-alpha02" }
 
-ksp = { id = "com.google.devtools.ksp", version = "2.2.0-2.0.2" }
+ksp = { id = "com.google.devtools.ksp", version = "2.2.10-2.0.2" }
 
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
