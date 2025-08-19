@@ -20,22 +20,36 @@ The _one and only_ Android application that displays the countries from the [RES
 
 ## 🌟 Tech stack
 
+### 🏛️ Multiplatform foundation
+
 - 🛂 Separated Gradle subprojects for each data layer
 - 💉 **Dependency Injection** through [Koin](https://github.com/InsertKoinIO/koin)
 - 🌊 **Async calls and Reactive Flows** through [Kotlinx Coroutines](https://github.com/Kotlin/kotlinx.coroutines)
 - 🌍 **Remote fetching** from the REST API through [Ktor Client](https://github.com/ktorio/ktor)
 - 📄 **Data serialization** through [Kotlinx Serialization](https://github.com/Kotlin/kotlinx.serialization)
 - 🍔 **Caching on a local database** with [AndroidX Room](https://developer.android.com/jetpack/androidx/releases/room)
-- 📦 **Different data layer handling** through [Store](https://github.com/MobileNativeFoundation/Store)
-- 🎨 **UI** implemented using [Jetpack Compose](https://developer.android.com/compose), with a separated Design System module
+- 🗂️ **Different data layer handling** through [Store](https://github.com/MobileNativeFoundation/Store)
 - ❗️ Network errors clearly propagated through layers and displayed to the user
-- 📸 **Screenshot testing** with [Paparazzi](https://github.com/cashapp/paparazzi)
-- ⚙️ **Unit tests** using:
-  - [JUnit4](https://github.com/junit-team/junit4)
+- 🧪 **Unit tests** using:
+  - [Kotlin Test](https://kotlinlang.org/api/core/kotlin-test/)
   - [AssertK](https://github.com/willowtreeapps/assertk)
   - [Turbine](https://github.com/cashapp/turbine)
-- 🦾 [Instrumented tests](https://developer.android.com/training/testing/instrumented-tests)
 - 🧩 **Shared build logic** between subprojects through [convention plugins](https://docs.gradle.org/current/samples/sample_convention_plugins.html)
+
+### 🤖 Android application
+
+- 🎨 **UI** implemented using [Jetpack Compose](https://developer.android.com/compose), with a separated Design System module
+- 📸 **Screenshot testing** using [Paparazzi](https://github.com/cashapp/paparazzi)
+- 🧪 **Unit tests** using [JUnit4](https://github.com/junit-team/junit4)
+- 🦾 [Instrumented tests](https://developer.android.com/training/testing/instrumented-tests) with:
+  - [AndroidX Compose Testing libraries](https://developer.android.com/develop/ui/compose/testing)
+  - [Espresso](https://developer.android.com/training/testing/espresso)
+
+###  iOS application
+
+- 🎨 **UI** implemented using [SwiftUI](https://developer.apple.com/swiftui/)
+- 📦 **Dependencies management** through [Swift Package Manager](https://github.com/swiftlang/swift-package-manager)
+- 🧰 **Xcode configuration files management** through [Tuist](https://github.com/tuist/tuist)
 
 ## 🛣 Roadmap for `1.0`
 
@@ -44,8 +58,8 @@ The _one and only_ Android application that displays the countries from the [RES
 - [ ] Work on Compose performance optimizations
 - [x] Migrate `:data:repository` layer to [Store](https://github.com/MobileNativeFoundation/Store)
 - [x] Delete orphan columns from `language`, `continent`, `currency`, `capital` tables by creating a database trigger
-- [ ] Move common modules to [Kotlin Multiplatform](https://www.jetbrains.com/kotlin-multiplatform/)
-- [ ] Create iOS application & UI implementation with [SwiftUI](https://developer.apple.com/swiftui/)
+- [x] Move common modules to [Kotlin Multiplatform](https://www.jetbrains.com/kotlin-multiplatform/)
+- [x] Create iOS application & UI implementation with [SwiftUI](https://developer.apple.com/swiftui/)
 - [ ] Validate external libraries licenses through [Licensee](https://github.com/cashapp/licensee)
 - [ ] Create a proper CD pipeline
 
