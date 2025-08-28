@@ -19,9 +19,7 @@ import org.koin.test.KoinTestRule
 import org.koin.test.inject
 import org.koin.test.mock.declare
 import red.razvan.restcountries.compose.app.AppModule
-import red.razvan.restcountries.compose.app.internal.screens.countries.CountriesScreenUiState
-import red.razvan.restcountries.compose.app.internal.screens.countries.CountriesScreenViewModel
-import red.razvan.restcountries.data.models.NetworkFailures
+import red.razvan.restcountries.data.models.NetworkFailure
 import red.razvan.restcountries.domain.ObserveCountryListItems
 import red.razvan.restcountries.domain.RefreshCountryListItems
 import red.razvan.restcountries.testresources.domain.EmptyObserveCountryListItems
@@ -104,7 +102,7 @@ internal class CountriesScreenViewModelTests : KoinTest {
 
   @Test
   fun `Given a failing refresh and the cached data emitted, check the UI state`() = runTest {
-    val expectedNetworkFailure = NetworkFailures.HttpStatusCodeFailureResult(
+    val expectedNetworkFailure = NetworkFailure.WithHttpStatusCode(
       code = 400,
       exception = RuntimeException("test"),
     )
@@ -143,7 +141,7 @@ internal class CountriesScreenViewModelTests : KoinTest {
 
   @Test
   fun `Given a failing refresh without emitted cached data, check the UI state`() = runTest {
-    val expectedNetworkFailure = NetworkFailures.HttpStatusCodeFailureResult(
+    val expectedNetworkFailure = NetworkFailure.WithHttpStatusCode(
       code = 400,
       exception = RuntimeException("test"),
     )

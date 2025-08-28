@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import red.razvan.restcountries.data.models.CountryId
 import red.razvan.restcountries.data.models.NetworkFailure
-import red.razvan.restcountries.domain.InvokeStatuses
+import red.razvan.restcountries.domain.InvokeStatus
 import red.razvan.restcountries.domain.ObserveDetailedCountryByIdOrNull
 import red.razvan.restcountries.domain.RefreshDetailedCountryById
 
@@ -59,14 +59,14 @@ internal class CountryDetailsScreenViewModel(
       refreshDetailedCountryById(countryId)
         .collect { status ->
           when (status) {
-            is InvokeStatuses.Failure<NetworkFailure> -> {
+            is InvokeStatus.Failure<NetworkFailure> -> {
               mutableNetworkFailure.emit(status.error)
               mutableIsRefreshing.emit(false)
             }
-            InvokeStatuses.InProgress -> {
+            InvokeStatus.InProgress -> {
               mutableIsRefreshing.emit(true)
             }
-            is InvokeStatuses.Successful<*> -> {
+            is InvokeStatus.Successful<*> -> {
               mutableIsRefreshing.emit(false)
             }
           }

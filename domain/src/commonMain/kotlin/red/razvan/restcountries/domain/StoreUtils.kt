@@ -22,16 +22,16 @@ internal fun <Key : Any, Output : Any> Store<Key, Output>.streamRefreshStatus(
 ): Flow<InvokeStatus<Unit, NetworkFailure>> = stream(StoreReadRequest.fresh(key))
   .map { response ->
     when (response) {
-      is StoreReadResponse.Data<Output> -> InvokeStatuses.Successful(data = Unit)
+      is StoreReadResponse.Data<Output> -> InvokeStatus.Successful(data = Unit)
       is StoreReadResponse.Error.Custom<*> -> {
         val error = response.error
         if (error !is NetworkFailure) {
           error("Store error $error not expected")
         }
 
-        InvokeStatuses.Failure(error)
+        InvokeStatus.Failure(error)
       }
-      StoreReadResponse.Initial, is StoreReadResponse.Loading -> InvokeStatuses.InProgress
+      StoreReadResponse.Initial, is StoreReadResponse.Loading -> InvokeStatus.InProgress
       is StoreReadResponse.NoNewData,
       is StoreReadResponse.Error.Message,
       is StoreReadResponse.Error.Exception,

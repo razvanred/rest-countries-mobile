@@ -7,9 +7,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import red.razvan.restcountries.data.models.NetworkFailure
-import red.razvan.restcountries.data.models.NetworkFailures
 import red.razvan.restcountries.domain.InvokeStatus
-import red.razvan.restcountries.domain.InvokeStatuses
 import red.razvan.restcountries.domain.RefreshCountryListItems
 
 class SuccessfulRefreshCountryListItems(
@@ -17,20 +15,20 @@ class SuccessfulRefreshCountryListItems(
 ) : RefreshCountryListItems {
 
   override fun invoke(): Flow<InvokeStatus<Unit, NetworkFailure>> = flow {
-    emit(InvokeStatuses.InProgress)
+    emit(InvokeStatus.InProgress)
     delay(emitDelayInMillis)
-    emit(InvokeStatuses.Successful(Unit))
+    emit(InvokeStatus.Successful(Unit))
   }
 }
 
 class FailingRefreshCountryListItems(
-  private val failure: NetworkFailure = NetworkFailures.Undefined(null),
+  private val failure: NetworkFailure = NetworkFailure.Undefined(null),
   private val failureEmitDelayInMillis: Long = 0L,
 ) : RefreshCountryListItems {
 
   override fun invoke(): Flow<InvokeStatus<Unit, NetworkFailure>> = flow {
-    emit(InvokeStatuses.InProgress)
+    emit(InvokeStatus.InProgress)
     delay(failureEmitDelayInMillis)
-    emit(InvokeStatuses.Failure(failure))
+    emit(InvokeStatus.Failure(failure))
   }
 }

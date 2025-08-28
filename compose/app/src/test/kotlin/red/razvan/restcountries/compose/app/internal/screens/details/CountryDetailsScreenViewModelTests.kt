@@ -20,9 +20,7 @@ import org.koin.test.KoinTestRule
 import org.koin.test.get
 import org.koin.test.mock.declare
 import red.razvan.restcountries.compose.app.AppModule
-import red.razvan.restcountries.compose.app.internal.screens.details.CountryDetailsScreenViewModel
-import red.razvan.restcountries.compose.app.internal.screens.details.CountryDetailsUiState
-import red.razvan.restcountries.data.models.NetworkFailures
+import red.razvan.restcountries.data.models.NetworkFailure
 import red.razvan.restcountries.domain.ObserveDetailedCountryByIdOrNull
 import red.razvan.restcountries.domain.RefreshDetailedCountryById
 import red.razvan.restcountries.testresources.domain.FailingRefreshDetainedCountryById
@@ -106,7 +104,7 @@ class CountryDetailsScreenViewModelTests : KoinTest {
 
   @Test
   fun `Given a failing refresh and the cached data emitted, check the UI state`() = runTest {
-    val expectedNetworkFailure = NetworkFailures.HttpStatusCodeFailureResult(
+    val expectedNetworkFailure = NetworkFailure.WithHttpStatusCode(
       code = 400,
       exception = RuntimeException("test"),
     )
@@ -148,7 +146,7 @@ class CountryDetailsScreenViewModelTests : KoinTest {
 
   @Test
   fun `Given a failing refresh without emitted cached data, check the UI state`() = runTest {
-    val expectedNetworkFailure = NetworkFailures.Undefined(exception = RuntimeException("Test"))
+    val expectedNetworkFailure = NetworkFailure.Undefined(exception = RuntimeException("Test"))
 
     declare<ObserveDetailedCountryByIdOrNull> {
       SampleDataObserveDetailedCountryByIdOrNull()

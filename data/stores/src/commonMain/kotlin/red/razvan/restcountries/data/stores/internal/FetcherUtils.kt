@@ -6,7 +6,6 @@ package red.razvan.restcountries.data.stores.internal
 import org.mobilenativefoundation.store.store5.Fetcher
 import org.mobilenativefoundation.store.store5.FetcherResult
 import red.razvan.restcountries.data.models.NetworkFailure
-import red.razvan.restcountries.data.models.NetworkFailures
 
 internal fun <Key : Any, Network : Any> Fetcher.Companion.ofRemoteResult(
   fetch: suspend (Key) -> RemoteResult<Network>,
@@ -23,12 +22,12 @@ internal fun <Key : Any, Network : Any> Fetcher.Companion.ofRemoteResult(
 
 private fun FailureRemoteResult.toNetworkFailure(): NetworkFailure = when (this) {
   is HttpStatusCodeFailureRemoteResult -> {
-    NetworkFailures.HttpStatusCodeFailureResult(
+    NetworkFailure.WithHttpStatusCode(
       code = code,
       exception = exception,
     )
   }
   is UndefinedFailureRemoteResult -> {
-    NetworkFailures.Undefined(exception = exception)
+    NetworkFailure.Undefined(exception = exception)
   }
 }
