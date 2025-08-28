@@ -77,6 +77,9 @@ jobs:
   apple:
     name: Apple Build
     runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: ./ios-app
     timeout-minutes: 60
 
     steps:
@@ -95,14 +98,18 @@ jobs:
           cache-disabled: true
 
       - name: Run unit tests
+        working-directory: .
         run: |
           ./gradlew test
 
       - name: Setup Mise
         uses: jdx/mise-action@v2
 
+      - name: Fetch dependencies
+        run: mise install && tuist install
+
       - name: Build Apple targets
-        run: cd ios-app && mise install && tuist build
+        run: tuist build
 
       - name: Upload build reports
         if: always()
