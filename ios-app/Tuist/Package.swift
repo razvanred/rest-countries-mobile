@@ -16,5 +16,5 @@ let package = Package(
   name: "rest-countries",
   dependencies: [
     .package(url: "https://github.com/hmlongco/Factory.git", from: "2.5.3")
-  ],
+  ]
 )
