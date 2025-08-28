@@ -87,6 +87,22 @@ jobs:
         with:
           lfs: true
 
+      - name: Select Xcode 26.0-Beta
+        run: |
+          # Try different possible Xcode 26.0-Beta paths
+          if [ -d "/Applications/Xcode_26.0-beta.app" ]; then
+            sudo xcode-select -s /Applications/Xcode_26.0-beta.app
+          elif [ -d "/Applications/Xcode-26.0-beta.app" ]; then
+            sudo xcode-select -s /Applications/Xcode-26.0-beta.app
+          elif [ -d "/Applications/Xcode_26_beta.app" ]; then
+            sudo xcode-select -s /Applications/Xcode_26_beta.app
+          else
+            echo "Warning: Xcode 26.0-Beta not found, using default"
+          fi
+
+      - name: Setup iOS platform
+        run: xcodebuild -downloadPlatform iOS
+
       - name: Setup JDK
         uses: actions/setup-java@v4.7.1
         with:
@@ -105,8 +121,11 @@ jobs:
       - name: Setup Mise
         uses: jdx/mise-action@v2
 
-      - name: Fetch dependencies
-        run: mise install && tuist install
+      - name: Install dependencies with Mise
+        run: mise install
+
+      - name: Install dependencies with Tuist
+        run: tuist install
 
       - name: Build Apple targets
         run: tuist build
