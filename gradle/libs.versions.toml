@@ -111,7 +111,7 @@ kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "ko
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
 
-skie = { id = "co.touchlab.skie", version = "0.10.5" }
+skie = { id = "co.touchlab.skie", version = "0.10.6" }
 
 paparazzi = { id = "app.cash.paparazzi", version = "2.0.0-alpha02" }
 
