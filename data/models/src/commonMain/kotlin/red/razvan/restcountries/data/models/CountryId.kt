@@ -3,7 +3,4 @@
 
 package red.razvan.restcountries.data.models
 
-import kotlin.jvm.JvmInline
-
-@JvmInline
-value class CountryId(val value: String)
+data class CountryId(val value: String)

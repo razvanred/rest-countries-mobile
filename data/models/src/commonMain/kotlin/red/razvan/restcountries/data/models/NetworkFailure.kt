@@ -3,14 +3,10 @@
 
 package red.razvan.restcountries.data.models
 
-import kotlin.jvm.JvmInline
-
 sealed interface NetworkFailure {
   val exception: Exception?
-}
 
-object NetworkFailures {
-  data class HttpStatusCodeFailureResult(
+  data class WithHttpStatusCode(
     val code: Int,
     override val exception: Exception?,
   ) : NetworkFailure {
@@ -22,6 +18,5 @@ object NetworkFailures {
       get() = code in 500..599
   }
 
-  @JvmInline
-  value class Undefined(override val exception: Exception?) : NetworkFailure
+  data class Undefined(override val exception: Exception?) : NetworkFailure
 }

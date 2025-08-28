@@ -1,10 +1,18 @@
 import SwiftUI
+import DomainKt
 
 @main
 struct RestCountriesApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-        }
+ 
+  init() {
+    KoinDomainHelper.shared.startKoin()
+  }
+  
+  var body: some Scene {
+    WindowGroup {
+      NavigationView {
+        CountriesView()
+      }
     }
+  }
 }

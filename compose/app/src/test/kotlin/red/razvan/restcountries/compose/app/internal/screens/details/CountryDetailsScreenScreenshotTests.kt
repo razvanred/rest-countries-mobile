@@ -18,12 +18,9 @@ import coil3.test.FakeImageLoaderEngine
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import red.razvan.restcountries.compose.app.internal.screens.details.CountryDetailsScreen
-import red.razvan.restcountries.compose.app.internal.screens.details.CountryDetailsUiState
 import red.razvan.restcountries.compose.design.RestCountriesTheme
 import red.razvan.restcountries.data.models.DetailedCountry
 import red.razvan.restcountries.data.models.NetworkFailure
-import red.razvan.restcountries.data.models.NetworkFailures
 import red.razvan.restcountries.testresources.domain.SampleData
 
 class CountryDetailsScreenScreenshotTests {
@@ -37,7 +34,7 @@ class CountryDetailsScreenScreenshotTests {
     get() = SampleData.DetailedCountries.Italy
 
   private val networkFailure: NetworkFailure
-    get() = NetworkFailures.HttpStatusCodeFailureResult(code = 500, exception = null)
+    get() = NetworkFailure.WithHttpStatusCode(code = 500, exception = null)
 
   @OptIn(DelicateCoilApi::class)
   @Before
