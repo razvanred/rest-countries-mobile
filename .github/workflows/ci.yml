@@ -114,8 +114,8 @@ jobs:
       - name: Check formatting
         run: swiftformat --lint .
 
-      - name: Setup iOS platform
-        run: xcodebuild -downloadPlatform iOS
+      - name: Use Xcode 16.4
+        run: sudo xcode-select -switch /Applications/Xcode_16.4.app
 
       - name: Build Apple targets
         run: tuist build
