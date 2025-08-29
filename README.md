@@ -18,6 +18,19 @@ The _one and only_ Android application that displays the countries from the [RES
    </picture>
 </div>
 
+<div align="center" style="margin:auto">
+   <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="docs/assets/iphone16-dark-countries-screen.png" />
+      <source media="(prefers-color-scheme: light)" srcset="docs/assets/iphone16-light-countries-screen.png" />
+      <img alt="Device screenshot of the Countries screen on an iPhone 16" src="docs/assets/iphone16-light-countries-screen.png" width="250px" hspace="20" vspace="250px" />
+   </picture>
+   <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="docs/assets/iphone16-dark-details-screen.png" />
+      <source media="(prefers-color-scheme: light)" srcset="docs/assets/iphone16-light-details-screen.png" />
+      <img alt='Device screenshot of the "Republic of Croatia" country detail screen on an iPhone 16' src="docs/assets/iphone16-light-details-screen.png" width="250px" hspace="20" vspace="250px" />
+   </picture>
+</div>
+
 ## 🌟 Tech stack
 
 ### 🏛️ Multiplatform foundation
@@ -46,7 +59,7 @@ The _one and only_ Android application that displays the countries from the [RES
   - [AndroidX Compose Testing libraries](https://developer.android.com/develop/ui/compose/testing)
   - [Espresso](https://developer.android.com/training/testing/espresso)
 
-###  iOS application
+### 🍎 iOS application
 
 - 🎨 **UI** implemented using [SwiftUI](https://developer.apple.com/swiftui/)
 - 💉 **Dependency Injection** through [Factory](https://github.com/hmlongco/Factory)
