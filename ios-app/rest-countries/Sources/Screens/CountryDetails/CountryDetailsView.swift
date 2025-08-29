@@ -18,19 +18,20 @@ struct CountryDetailsView: View {
   }
 
   var body: some View {
-    ZStack {
-      List {
-        if let country = viewModel.country {
-          Text(country.commonName)
-        }
-      }
-
-      if !isInitialRefreshCompleted {
-        ProgressView()
+    List {
+      if let country = viewModel.country {
+        Text(country.commonName)
       }
     }
     .navigationTitle("Country")
     .navigationBarTitleDisplayMode(.inline)
+    .toolbar {
+      if !isInitialRefreshCompleted {
+        ToolbarItem(placement: .topBarTrailing) {
+          ProgressView()
+        }
+      }
+    }
     .if(isInitialRefreshCompleted) { view in
       view.refreshable {
         await viewModel.refresh()
