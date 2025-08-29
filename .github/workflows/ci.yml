@@ -114,6 +114,9 @@ jobs:
       - name: Check formatting
         run: swiftformat --lint .
 
+      - name: Setup iOS platform
+        run: xcodebuild -downloadPlatform iOS
+
       - name: Build Apple targets
         run: tuist build
 
