@@ -9,23 +9,22 @@ The _one and only_ Android application that displays the countries from the [RES
    <picture>
       <source media="(prefers-color-scheme: dark)" srcset="docs/assets/pixel9a-dark-countries-screen.png" />
       <source media="(prefers-color-scheme: light)" srcset="docs/assets/pixel9a-light-countries-screen.png" />
-      <img alt="Device screenshot of the Countries screen on a Pixel 9A" src="docs/assets/pixel9a-light-countries-screen.png" width="200" />
+      <img alt="Device screenshot of the Countries screen on a Pixel 9A" src="docs/assets/pixel9a-light-countries-screen.png" width="150" />
+   </picture>
+   <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="docs/assets/iphone16-dark-countries-screen.png" />
+      <source media="(prefers-color-scheme: light)" srcset="docs/assets/iphone16-light-countries-screen.png" />
+      <img alt="Device screenshot of the Countries screen on an iPhone 16" src="docs/assets/iphone16-light-countries-screen.png" width="150" hspace="10" />
    </picture>
    <picture>
       <source media="(prefers-color-scheme: dark)" srcset="docs/assets/pixel9a-dark-details-screen.png" />
       <source media="(prefers-color-scheme: light)" srcset="docs/assets/pixel9a-light-details-screen.png" />
-      <img alt='Device screenshot of the "Republic of Croatia" country detail screen on a Pixel 9A' src="docs/assets/pixel9a-light-details-screen.png" width="200" hspace="20" />
-   </picture>
-
-  <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="docs/assets/iphone16-dark-countries-screen.png" />
-      <source media="(prefers-color-scheme: light)" srcset="docs/assets/iphone16-light-countries-screen.png" />
-      <img alt="Device screenshot of the Countries screen on an iPhone 16" src="docs/assets/iphone16-light-countries-screen.png" width="200" hspace="20" />
+      <img alt='Device screenshot of the "Republic of Croatia" country detail screen on a Pixel 9A' src="docs/assets/pixel9a-light-details-screen.png" width="150" hspace="10" />
    </picture>
    <picture>
       <source media="(prefers-color-scheme: dark)" srcset="docs/assets/iphone16-dark-details-screen.png" />
       <source media="(prefers-color-scheme: light)" srcset="docs/assets/iphone16-light-details-screen.png" />
-      <img alt='Device screenshot of the "Republic of Croatia" country detail screen on an iPhone 16' src="docs/assets/iphone16-light-details-screen.png" width="200" hspace="20" />
+      <img alt='Device screenshot of the "Republic of Croatia" country detail screen on an iPhone 16' src="docs/assets/iphone16-light-details-screen.png" width="150" hspace="10" />
    </picture>
 </div>
 
