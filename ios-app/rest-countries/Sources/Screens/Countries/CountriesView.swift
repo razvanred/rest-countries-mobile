@@ -15,17 +15,11 @@ struct CountriesView: View {
   private var viewModel = CountriesViewModel()
 
   var body: some View {
-    ZStack {
-      List(viewModel.countries) { country in
-        NavigationLink(
-          destination: CountryDetailsView(countryId: country.id)
-        ) {
-          CountryListItemView(country: country)
-        }
-      }
-
-      if !isInitialRefreshCompleted, viewModel.countries.isEmpty {
-        ProgressView()
+    List(viewModel.countries) { country in
+      NavigationLink(
+        destination: CountryDetailsView(countryId: country.id)
+      ) {
+        CountryListItemView(country: country)
       }
     }
     .if(isInitialRefreshCompleted) { view in
@@ -34,6 +28,13 @@ struct CountriesView: View {
       }
     }
     .navigationTitle("Countries")
+    .toolbar {
+      if !isInitialRefreshCompleted {
+        ToolbarItem(placement: .topBarTrailing) {
+          ProgressView()
+        }
+      }
+    }
     .task {
       await viewModel.activate()
     }
