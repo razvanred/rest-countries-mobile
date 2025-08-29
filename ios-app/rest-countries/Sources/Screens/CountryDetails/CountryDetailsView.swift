@@ -31,7 +31,6 @@ struct CountryDetailsView : View {
       }
     }
     .navigationTitle("Country")
-    .navigationSubtitle(viewModel.isRefreshing ? "Refreshing…" : "")
     .navigationBarTitleDisplayMode(.inline)
     .if(isInitialRefreshCompleted) { view in
       view.refreshable {

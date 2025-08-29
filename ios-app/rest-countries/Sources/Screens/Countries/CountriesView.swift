@@ -24,7 +24,7 @@ struct CountriesView : View {
           CountryListItemView(country: country)
         }
       }
-      
+ 
       if !isInitialRefreshCompleted && viewModel.countries.isEmpty {
         ProgressView()
       }
@@ -35,7 +35,6 @@ struct CountriesView : View {
       }
     }
     .navigationTitle("Countries")
-    .navigationSubtitle(viewModel.isRefreshing ? "Refreshing…" : "")
     .task {
       await viewModel.activate()
     }
