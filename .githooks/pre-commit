@@ -1,6 +1,6 @@
 #!/bin/sh
 
-echo "[pre-commit] Checking formatting issues"
+echo "[pre-commit] Checking formatting issues with Spotless"
 
 # run the spotlessCheck with the gradle wrapper
 case "$(uname -s)" in
@@ -16,5 +16,28 @@ esac
 # store the last exit code in a variable
 RESULT=$?
 
-# return the './gradlew spotlessCheck' exit code
+if [ $RESULT -ne 0 ];
+  then exit $RESULT
+fi
+
+if command -v swift >/dev/null 2>&1
+  then
+    cd ios-app || exit 1
+    echo "[pre-commit] Activate Mise"
+    eval "$(mise activate bash)"
+    echo "[pre-commit] Fetch tools with Mise"
+    mise install
+    RESULT=$?
+    if [ $RESULT -ne 0 ];
+      then exit $RESULT
+    fi
+
+    echo "[pre-commit] Checking formatting issues with SwiftFormat"
+    swiftformat --lint .
+else
+  echo "[pre-commit] Swift was not found in your environment, skipping formatting check"
+fi
+
+RESULT=$?
+
 exit $RESULT

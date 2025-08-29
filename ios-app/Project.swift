@@ -1,5 +1,5 @@
-import ProjectDescription
 import Foundation
+import ProjectDescription
 
 private let kotlinModules = ["domain"]
 
@@ -25,11 +25,11 @@ let project = Project(
         kotlinFrameworkConfig(module: module)
       },
       dependencies: [
-        .external(name: "FactoryKit")
+        .external(name: "FactoryKit"),
       ],
       settings: .settings(
         base: SettingsDictionary()
-        /// See the [Kotlin Multiplatform project integration guide](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-integrate-in-existing-app.html#connect-the-framework-to-your-ios-project).
+          /// See the [Kotlin Multiplatform project integration guide](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-integrate-in-existing-app.html#connect-the-framework-to-your-ios-project).
           .frameworkSearchPaths(
             kotlinModules.map { module in
               kotlinFrameworkSearchPath(module: module)
@@ -68,9 +68,9 @@ private func kotlinFrameworkSearchPath(module: String) -> String {
 private extension SettingsDictionary {
   // FRAMEWORK_SEARCH_PATHS
   func frameworkSearchPaths(_ value: [String]) -> SettingsDictionary {
-    merging(["FRAMEWORK_SEARCH_PATHS" : .array(value)])
+    merging(["FRAMEWORK_SEARCH_PATHS": .array(value)])
   }
-  
+
   func frameworkSearchPaths(_ value: String...) -> SettingsDictionary {
     frameworkSearchPaths(value)
   }

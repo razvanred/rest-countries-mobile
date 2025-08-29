@@ -5,9 +5,9 @@
 //  Created by Răzvan Roşu on 24/08/25.
 //
 
-import Foundation
-import FactoryKit
 import DomainKt
+import FactoryKit
+import Foundation
 
 extension Container {
   var observeDetailedCountryByIdOrNil: Factory<ObserveDetailedCountryByIdOrNil> {

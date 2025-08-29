@@ -4,17 +4,16 @@
 //
 //  Created by Răzvan Roşu on 16/08/25.
 //
-import SwiftUI
 import FactoryKit
+import SwiftUI
 
-struct CountriesView : View {
-  
+struct CountriesView: View {
   @State
   private var isInitialRefreshCompleted: Bool = false
-  
+
   @StateObject
   private var viewModel = CountriesViewModel()
-  
+
   var body: some View {
     ZStack {
       List(viewModel.countries) { country in
@@ -24,8 +23,8 @@ struct CountriesView : View {
           CountryListItemView(country: country)
         }
       }
- 
-      if !isInitialRefreshCompleted && viewModel.countries.isEmpty {
+
+      if !isInitialRefreshCompleted, viewModel.countries.isEmpty {
         ProgressView()
       }
     }
@@ -45,13 +44,13 @@ struct CountriesView : View {
   }
 }
 
-fileprivate struct CountryListItemView : View {
+private struct CountryListItemView: View {
   private let country: CountryListItem
-  
+
   fileprivate init(country: CountryListItem) {
     self.country = country
   }
-  
+
   fileprivate var body: some View {
     HStack {
       Text(country.emojiFlag)
@@ -60,10 +59,8 @@ fileprivate struct CountryListItemView : View {
   }
 }
 
-
 struct CountriesView_Previews: PreviewProvider {
   static var previews: some View {
     Text("Hello world!")
   }
 }
-

@@ -68,14 +68,13 @@ extension ModelsDetailedCountry {
 
 extension ModelsNetworkFailure {
   func toModel() -> NetworkError {
-    return switch self {
+    switch self {
     case let failure as ModelsNetworkFailureWithHttpStatusCode:
-        .withHttpStatusCode(code: Int(failure.code))
+      .withHttpStatusCode(code: Int(failure.code))
     case is ModelsNetworkFailureUndefined:
-        .undefined
+      .undefined
     default:
       fatalError("The NetworkFailure \(self) is not recognized")
     }
   }
 }
-

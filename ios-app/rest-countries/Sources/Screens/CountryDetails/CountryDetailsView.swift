@@ -6,18 +6,17 @@
 //
 import SwiftUI
 
-struct CountryDetailsView : View {
-  
+struct CountryDetailsView: View {
   @StateObject
   private var viewModel: CountryDetailsViewModel
-  
+
   @State
   private var isInitialRefreshCompleted = false
-  
+
   init(countryId: CountryId) {
     _viewModel = StateObject(wrappedValue: CountryDetailsViewModel(countryId: countryId))
   }
-  
+
   var body: some View {
     ZStack {
       List {
@@ -25,7 +24,7 @@ struct CountryDetailsView : View {
           Text(country.commonName)
         }
       }
-      
+
       if !isInitialRefreshCompleted {
         ProgressView()
       }
