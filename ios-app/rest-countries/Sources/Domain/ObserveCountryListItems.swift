@@ -10,14 +10,13 @@ protocol ObserveCountryListItems {
   func callAsFunction() -> any AsyncSequence<[CountryListItem], Never>
 }
 
-struct DefaultObserveCountryListItems : ObserveCountryListItems {
-  
+struct DefaultObserveCountryListItems: ObserveCountryListItems {
   private let observeCountryListItems: DomainKt.ObserveCountryListItems
-  
+
   init(observeCountryListItems: DomainKt.ObserveCountryListItems) {
     self.observeCountryListItems = observeCountryListItems
   }
-  
+
   func callAsFunction() -> any AsyncSequence<[CountryListItem], Never> {
     observeCountryListItems
       .invoke()
