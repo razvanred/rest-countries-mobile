@@ -49,7 +49,7 @@ The _one and only_ Android application that displays the countries from the [RES
 ###  iOS application
 
 - 🎨 **UI** implemented using [SwiftUI](https://developer.apple.com/swiftui/)
-- 💉 **Dependency Injection** through [Needle](https://github.com/uber/needle)
+- 💉 **Dependency Injection** through [Factory](https://github.com/hmlongco/Factory)
 - 📦 **Remote dependencies management** through [Swift Package Manager](https://github.com/swiftlang/swift-package-manager)
 - 🧰 **Xcode configuration files management** through [Tuist](https://github.com/tuist/tuist)
 
@@ -72,5 +72,6 @@ The _one and only_ Android application that displays the countries from the [RES
 - Although I never participated to this event, the [DroidKaigi](https://github.com/DroidKaigi) conference applications helped me
     during the early stages of my journey, and I am deeply grateful for the hard work the team is putting every year
 - [Now in Android](https://github.com/android/nowinandroid): A fully functional Android app built entirely with Kotlin and Jetpack Compose
+- [Clean Architecture for SwiftUI + Combine](https://github.com/nalexn/clean-architecture-swiftui/): SwiftUI sample app using Clean Architecture
 - All the contributors of the mentioned libraries
 - [REST Countries API contributors](https://gitlab.com/restcountries/restcountries)
