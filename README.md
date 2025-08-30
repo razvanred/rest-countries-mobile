@@ -3,13 +3,13 @@
 [![CI](https://github.com/razvanred/rest-countries-mobile/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/razvanred/rest-countries-mobile/actions/workflows/ci.yml)
 [![ktlint](https://img.shields.io/badge/ktlint%20code--style-%E2%9D%A4-FF4081)](https://pinterest.github.io/ktlint/)
 
-The _one and only_ Android application that displays the countries from the [REST Countries public API](https://restcountries.com/).
+The _one and only_ mobile application that displays the countries from the [REST Countries API](https://restcountries.com/).
 
 <div align="center" style="margin:auto">
    <picture>
       <source media="(prefers-color-scheme: dark)" srcset="docs/assets/pixel9a-dark-countries-screen.png" />
       <source media="(prefers-color-scheme: light)" srcset="docs/assets/pixel9a-light-countries-screen.png" />
-      <img alt="Device screenshot of the Countries screen on a Pixel 9A" src="docs/assets/pixel9a-light-countries-screen.png" width="150" />
+      <img alt="Device screenshot of the Countries screen on a Pixel 9A" src="docs/assets/pixel9a-light-countries-screen.png" width="150" hspace="10" />
    </picture>
    <picture>
       <source media="(prefers-color-scheme: dark)" srcset="docs/assets/iphone16-dark-countries-screen.png" />
@@ -81,7 +81,7 @@ The _one and only_ Android application that displays the countries from the [RES
     about the Android development, but also shaped me as a developer in a general way
 - Although I never participated to this event, the [DroidKaigi](https://github.com/DroidKaigi) conference applications helped me
     during the early stages of my journey, and I am deeply grateful for the hard work the team is putting every year
-- [Now in Android](https://github.com/android/nowinandroid): A fully functional Android app built entirely with Kotlin and Jetpack Compose
-- [Clean Architecture for SwiftUI + Combine](https://github.com/nalexn/clean-architecture-swiftui/): SwiftUI sample app using Clean Architecture
+- [Now in Android](https://github.com/android/nowinandroid): _A fully functional Android app built entirely with Kotlin and Jetpack Compose_
+- [Clean Architecture for SwiftUI + Combine](https://github.com/nalexn/clean-architecture-swiftui/): _SwiftUI sample app using Clean Architecture_
 - All the contributors of the mentioned libraries
-- [REST Countries API contributors](https://gitlab.com/restcountries/restcountries)
+- [REST Countries API project](https://gitlab.com/restcountries/restcountries)
