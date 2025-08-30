@@ -8,7 +8,6 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.res.stringResource
 import red.razvan.restcountries.compose.app.R
 import red.razvan.restcountries.data.models.NetworkFailure
-import red.razvan.restcountries.data.models.NetworkFailures
 
 fun interface NetworkFailureToMessageMapper {
   @Composable
@@ -18,14 +17,14 @@ fun interface NetworkFailureToMessageMapper {
 private object DefaultNetworkFailureToMessageMapper : NetworkFailureToMessageMapper {
   @Composable
   override fun map(failure: NetworkFailure) = when (failure) {
-    is NetworkFailures.HttpStatusCodeFailureResult -> {
+    is NetworkFailure.WithHttpStatusCode -> {
       if (failure.isServerDown) {
         stringResource(R.string.network_failure_server_issues_message, failure.code)
       } else {
         stringResource(R.string.network_failure_client_issues_message, failure.code)
       }
     }
-    is NetworkFailures.Undefined -> {
+    is NetworkFailure.Undefined -> {
       stringResource(R.string.network_failure_unknown_issues_message)
     }
   }

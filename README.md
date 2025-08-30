@@ -3,22 +3,34 @@
 [![CI](https://github.com/razvanred/rest-countries-mobile/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/razvanred/rest-countries-mobile/actions/workflows/ci.yml)
 [![ktlint](https://img.shields.io/badge/ktlint%20code--style-%E2%9D%A4-FF4081)](https://pinterest.github.io/ktlint/)
 
-The _one and only_ Android application that displays the countries from the [REST Countries public API](https://restcountries.com/).
+The _one and only_ mobile application that displays the countries from the [REST Countries API](https://restcountries.com/).
 
 <div align="center" style="margin:auto">
    <picture>
       <source media="(prefers-color-scheme: dark)" srcset="docs/assets/pixel9a-dark-countries-screen.png" />
       <source media="(prefers-color-scheme: light)" srcset="docs/assets/pixel9a-light-countries-screen.png" />
-      <img alt="Device screenshot of the Countries screen on a Pixel 9A" src="docs/assets/pixel9a-light-countries-screen.png" width="250px" hspace="20" vspace="250px" />
+      <img alt="Device screenshot of the Countries screen on a Pixel 9A" src="docs/assets/pixel9a-light-countries-screen.png" width="150" hspace="10" />
+   </picture>
+   <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="docs/assets/iphone16-dark-countries-screen.png" />
+      <source media="(prefers-color-scheme: light)" srcset="docs/assets/iphone16-light-countries-screen.png" />
+      <img alt="Device screenshot of the Countries screen on an iPhone 16" src="docs/assets/iphone16-light-countries-screen.png" width="150" hspace="10" />
    </picture>
    <picture>
       <source media="(prefers-color-scheme: dark)" srcset="docs/assets/pixel9a-dark-details-screen.png" />
       <source media="(prefers-color-scheme: light)" srcset="docs/assets/pixel9a-light-details-screen.png" />
-      <img alt='Device screenshot of the "Republic of Croatia" country detail screen on a Pixel 9A' src="docs/assets/pixel9a-light-details-screen.png" width="250px" hspace="20" vspace="250px" />
+      <img alt='Device screenshot of the "Republic of Croatia" country detail screen on a Pixel 9A' src="docs/assets/pixel9a-light-details-screen.png" width="150" hspace="10" />
+   </picture>
+   <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="docs/assets/iphone16-dark-details-screen.png" />
+      <source media="(prefers-color-scheme: light)" srcset="docs/assets/iphone16-light-details-screen.png" />
+      <img alt='Device screenshot of the "Republic of Croatia" country detail screen on an iPhone 16' src="docs/assets/iphone16-light-details-screen.png" width="150" hspace="10" />
    </picture>
 </div>
 
 ## 🌟 Tech stack
+
+### 🏛️ Multiplatform foundation
 
 - 🛂 Separated Gradle subprojects for each data layer
 - 💉 **Dependency Injection** through [Koin](https://github.com/InsertKoinIO/koin)
@@ -26,16 +38,30 @@ The _one and only_ Android application that displays the countries from the [RES
 - 🌍 **Remote fetching** from the REST API through [Ktor Client](https://github.com/ktorio/ktor)
 - 📄 **Data serialization** through [Kotlinx Serialization](https://github.com/Kotlin/kotlinx.serialization)
 - 🍔 **Caching on a local database** with [AndroidX Room](https://developer.android.com/jetpack/androidx/releases/room)
-- 📦 **Different data layer handling** through [Store](https://github.com/MobileNativeFoundation/Store)
-- 🎨 **UI** implemented using [Jetpack Compose](https://developer.android.com/compose), with a separated Design System module
+- 🗂️ **Different data layer handling** through [Store](https://github.com/MobileNativeFoundation/Store)
 - ❗️ Network errors clearly propagated through layers and displayed to the user
-- 📸 **Screenshot testing** with [Paparazzi](https://github.com/cashapp/paparazzi)
-- ⚙️ **Unit tests** using:
-  - [JUnit4](https://github.com/junit-team/junit4)
+- 🧪 **Unit tests** using:
+  - [Kotlin Test](https://kotlinlang.org/api/core/kotlin-test/)
   - [AssertK](https://github.com/willowtreeapps/assertk)
   - [Turbine](https://github.com/cashapp/turbine)
-- 🦾 [Instrumented tests](https://developer.android.com/training/testing/instrumented-tests)
 - 🧩 **Shared build logic** between subprojects through [convention plugins](https://docs.gradle.org/current/samples/sample_convention_plugins.html)
+
+### 🤖 Android application
+
+- 🎨 **UI** implemented using [Jetpack Compose](https://developer.android.com/compose), with a separated Design System module
+- 🖼️ **Image loading** through [Coil](https://github.com/coil-kt/coil)
+- 📸 **Screenshot testing** using [Paparazzi](https://github.com/cashapp/paparazzi)
+- 🧪 **Unit tests** using [JUnit4](https://github.com/junit-team/junit4)
+- 🦾 [Instrumented tests](https://developer.android.com/training/testing/instrumented-tests) with:
+  - [AndroidX Compose Testing libraries](https://developer.android.com/develop/ui/compose/testing)
+  - [Espresso](https://developer.android.com/training/testing/espresso)
+
+### 🍎 iOS application
+
+- 🎨 **UI** implemented using [SwiftUI](https://developer.apple.com/swiftui/)
+- 💉 **Dependency Injection** through [Factory](https://github.com/hmlongco/Factory)
+- 📦 **Remote dependencies management** through [Swift Package Manager](https://github.com/swiftlang/swift-package-manager)
+- 🧰 **Xcode configuration files management** through [Tuist](https://github.com/tuist/tuist)
 
 ## 🛣 Roadmap for `1.0`
 
@@ -44,8 +70,8 @@ The _one and only_ Android application that displays the countries from the [RES
 - [ ] Work on Compose performance optimizations
 - [x] Migrate `:data:repository` layer to [Store](https://github.com/MobileNativeFoundation/Store)
 - [x] Delete orphan columns from `language`, `continent`, `currency`, `capital` tables by creating a database trigger
-- [ ] Move common modules to [Kotlin Multiplatform](https://www.jetbrains.com/kotlin-multiplatform/)
-- [ ] Create iOS application & UI implementation with [SwiftUI](https://developer.apple.com/swiftui/)
+- [x] Move common modules to [Kotlin Multiplatform](https://www.jetbrains.com/kotlin-multiplatform/)
+- [x] Create iOS application & UI implementation with [SwiftUI](https://developer.apple.com/swiftui/)
 - [ ] Validate external libraries licenses through [Licensee](https://github.com/cashapp/licensee)
 - [ ] Create a proper CD pipeline
 
@@ -55,6 +81,7 @@ The _one and only_ Android application that displays the countries from the [RES
     about the Android development, but also shaped me as a developer in a general way
 - Although I never participated to this event, the [DroidKaigi](https://github.com/DroidKaigi) conference applications helped me
     during the early stages of my journey, and I am deeply grateful for the hard work the team is putting every year
-- [Now in Android](https://github.com/android/nowinandroid): A fully functional Android app built entirely with Kotlin and Jetpack Compose
+- [Now in Android](https://github.com/android/nowinandroid): _A fully functional Android app built entirely with Kotlin and Jetpack Compose_
+- [Clean Architecture for SwiftUI + Combine](https://github.com/nalexn/clean-architecture-swiftui/): _SwiftUI sample app using Clean Architecture_
 - All the contributors of the mentioned libraries
-- [REST Countries API contributors](https://gitlab.com/restcountries/restcountries)
+- [REST Countries API project](https://gitlab.com/restcountries/restcountries)

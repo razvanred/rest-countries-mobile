@@ -8,7 +8,7 @@ on:
 
 jobs:
   android:
-    name: "Android Build"
+    name: Android & Multiplatform Build
     runs-on: ubuntu-latest
     timeout-minutes: 60
 
@@ -72,5 +72,67 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: android-test-results
+          path: |
+            **/build/test-results/*
+  apple:
+    name: Apple Build
+    runs-on: macos-latest
+    defaults:
+      run:
+        working-directory: ./ios-app
+    timeout-minutes: 60
+
+    steps:
+      - uses: actions/checkout@v4.2.2
+        with:
+          lfs: true
+
+      - name: Setup JDK
+        uses: actions/setup-java@v4.7.1
+        with:
+          distribution: 'zulu'
+          java-version: 21
+
+      - uses: gradle/gradle-build-action@v3
+        with:
+          cache-disabled: true
+
+      - name: Use Xcode 16.4
+        run: sudo xcode-select -switch /Applications/Xcode_16.4.app
+
+      - name: Run unit tests
+        working-directory: .
+        run: |
+          ./gradlew iosSimulatorArm64Test
+
+      - name: Setup Mise
+        uses: jdx/mise-action@v2
+
+      - name: Install dependencies with Mise
+        run: mise install
+
+      - name: Install dependencies with Tuist
+        run: tuist install
+
+      - name: Check formatting
+        run: swiftformat --lint .
+
+      - name: Build Apple targets
+        run: tuist build
+
+      - name: Upload build reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: apple-reports
+          path: |
+            **/build/reports/*
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: apple-test-results
+          working-directory: .
           path: |
             **/build/test-results/*

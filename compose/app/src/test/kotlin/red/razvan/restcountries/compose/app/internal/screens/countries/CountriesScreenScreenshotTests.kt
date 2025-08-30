@@ -10,11 +10,9 @@ import app.cash.paparazzi.DeviceConfig
 import app.cash.paparazzi.Paparazzi
 import org.junit.Rule
 import org.junit.Test
-import red.razvan.restcountries.compose.app.internal.screens.countries.CountriesScreen
-import red.razvan.restcountries.compose.app.internal.screens.countries.CountriesScreenUiState
 import red.razvan.restcountries.compose.design.RestCountriesTheme
 import red.razvan.restcountries.data.models.CountryListItem
-import red.razvan.restcountries.data.models.NetworkFailures
+import red.razvan.restcountries.data.models.NetworkFailure
 import red.razvan.restcountries.testresources.domain.SampleData
 
 class CountriesScreenScreenshotTests {
@@ -70,7 +68,7 @@ class CountriesScreenScreenshotTests {
               items = items,
               isRefreshing = false,
               isDropdownMenuExpanded = false,
-              networkFailure = NetworkFailures.HttpStatusCodeFailureResult(
+              networkFailure = NetworkFailure.WithHttpStatusCode(
                 code = 500,
                 exception = null,
               ),
@@ -120,7 +118,7 @@ class CountriesScreenScreenshotTests {
               items = emptyList(),
               isRefreshing = false,
               isDropdownMenuExpanded = false,
-              networkFailure = NetworkFailures.HttpStatusCodeFailureResult(
+              networkFailure = NetworkFailure.WithHttpStatusCode(
                 code = 500,
                 exception = null,
               ),
