@@ -29,7 +29,7 @@ public struct CountriesView: View {
         await viewModel.refresh()
       }
     }
-    .navigationTitle("Countries")
+    .navigationTitle(String(localized: "CountriesViewNavigationTitle"))
     .toolbar {
       if !isInitialRefreshCompleted {
         ToolbarItem(placement: .topBarTrailing) {

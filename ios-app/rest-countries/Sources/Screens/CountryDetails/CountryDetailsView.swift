@@ -23,7 +23,7 @@ struct CountryDetailsView: View {
         LoadedContentView(country: country)
       }
     }
-    .navigationTitle("Country")
+    .navigationTitle(String(localized: "CountryDetailsViewNavigationTitle"))
     .navigationBarTitleDisplayMode(.inline)
     .toolbar {
       if !isInitialRefreshCompleted {
@@ -68,7 +68,7 @@ private struct LoadedContentView: View {
           Text(country.officialName)
             .font(.title2)
           if country.isOfficialNameDifferentFromCommon {
-            Text("Also known as \(country.commonName)")
+            Text(String(localized: "CountryAlsoKnownAsTitle \(country.commonName)"))
               .font(.subheadline)
           }
         }
@@ -78,7 +78,11 @@ private struct LoadedContentView: View {
     }
 
     if !country.continents.isEmpty {
-      Section(country.continents.count == 1 ? "Continent" : "Continents") {
+      Section(
+        country.continents.count == 1
+          ? String(localized: "ContinentSectionTitle")
+          : String(localized: "ContinentsSectionTitle")
+      ) {
         ForEach(country.continents, id: \.self) { continent in
           Text(continent)
         }
@@ -86,7 +90,11 @@ private struct LoadedContentView: View {
     }
 
     if !country.capital.isEmpty {
-      Section("Capital") {
+      Section(
+        country.capital.count == 1
+          ? String(localized: "CapitalSectionTitle")
+          : String(localized: "CapitalsSectionTitle")
+      ) {
         ForEach(country.capital, id: \.self) { capital in
           Text(capital)
         }
@@ -94,7 +102,11 @@ private struct LoadedContentView: View {
     }
 
     if !country.languages.isEmpty {
-      Section(country.languages.count == 1 ? "Language" : "Languages") {
+      Section(
+        country.languages.count == 1
+          ? String(localized: "LanguageSectionTitle")
+          : String(localized: "LanguagesSectionTitle")
+      ) {
         ForEach(country.languages) { language in
           Text(language.name)
         }
@@ -102,15 +114,19 @@ private struct LoadedContentView: View {
     }
 
     if !country.currencies.isEmpty {
-      Section(country.currencies.count == 1 ? "Currency" : "Currencies") {
+      Section(
+        country.currencies.count == 1
+          ? String(localized: "CurrencySectionTitle")
+          : String(localized: "CurrenciesSectionTitle")
+      ) {
         ForEach(country.currencies) { currency in
-          Text("\(currency.name) (\(currency.symbol))")
+          Text(String(localized: "CurrencyPropertyValue \(currency.name) \(currency.symbol)"))
         }
       }
     }
 
     Section {
-      ListItemDetailView(title: "Emoji flag", value: country.emojiFlag)
+      ListItemDetailView(title: String(localized: "EmojiFlagPropertyTitle"), value: country.emojiFlag)
     }
   }
 }
