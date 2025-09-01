@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct Currency: Hashable, Identifiable {
-  let id: CurrencyId
-  let name: String
-  let symbol: String
+public struct Currency: Hashable, Identifiable {
+  public let id: CurrencyId
+  public let name: String
+  public let symbol: String
 }

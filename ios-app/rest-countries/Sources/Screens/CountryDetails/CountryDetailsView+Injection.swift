@@ -9,16 +9,28 @@ import DomainKt
 import FactoryKit
 import Foundation
 
-extension Container {
+public extension Container {
+  var domainKtObserveDetailedCountryByIdOrNull: Factory<DomainKt.ObserveDetailedCountryByIdOrNull> {
+    self {
+      KoinDomainHelper.shared.observeDetailedCountryByIdOrNull
+    }.singleton
+  }
+
   var observeDetailedCountryByIdOrNil: Factory<ObserveDetailedCountryByIdOrNil> {
     self {
-      DefaultObserveDetailedCountryByIdOrNil(observeDetailedCountryByIdOrNull: KoinDomainHelper.shared.observeDetailedCountryByIdOrNull)
-    }
+      DefaultObserveDetailedCountryByIdOrNil(observeDetailedCountryByIdOrNull: Container.shared.domainKtObserveDetailedCountryByIdOrNull())
+    }.singleton
+  }
+
+  var domainKtRefreshDetailedCountryById: Factory<DomainKt.RefreshDetailedCountryById> {
+    self {
+      KoinDomainHelper.shared.refreshDetailedCountryById
+    }.singleton
   }
 
   var refreshDetailedCountryById: Factory<RefreshDetailedCountryById> {
     self {
-      DefaultRefreshDetailedCountryById(refreshDetailedCountryById: KoinDomainHelper.shared.refreshDetailedCountryById)
-    }
+      DefaultRefreshDetailedCountryById(refreshDetailedCountryById: Container.shared.domainKtRefreshDetailedCountryById())
+    }.singleton
   }
 }

@@ -6,7 +6,7 @@
 //
 import DomainKt
 
-protocol ObserveCountryListItems {
+public protocol ObserveCountryListItems {
   func callAsFunction() -> any AsyncSequence<[CountryListItem], Never>
 }
 
