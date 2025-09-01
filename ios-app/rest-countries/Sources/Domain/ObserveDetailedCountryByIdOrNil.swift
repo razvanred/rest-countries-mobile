@@ -6,7 +6,7 @@
 //
 import DomainKt
 
-protocol ObserveDetailedCountryByIdOrNil {
+public protocol ObserveDetailedCountryByIdOrNil {
   func callAsFunction(id: CountryId) -> any AsyncSequence<DetailedCountry?, Never>
 }
 

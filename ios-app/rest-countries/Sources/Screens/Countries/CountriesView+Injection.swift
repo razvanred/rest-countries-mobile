@@ -8,18 +8,32 @@ import DomainKt
 import FactoryKit
 import SwiftUI
 
-extension Container {
+public extension Container {
+  var domainKtObserveCountryListItems: Factory<DomainKt.ObserveCountryListItems> {
+    self {
+      KoinDomainHelper.shared.observeCountryListItems
+    }.singleton
+  }
+
   var observeCountryListItems: Factory<ObserveCountryListItems> {
     self {
       DefaultObserveCountryListItems(
-        observeCountryListItems: KoinDomainHelper.shared.observeCountryListItems,
+        observeCountryListItems: Container.shared.domainKtObserveCountryListItems(),
       )
+    }.singleton
+  }
+
+  var domainKtRefreshCountryListItems: Factory<DomainKt.RefreshCountryListItems> {
+    self {
+      KoinDomainHelper.shared.refreshCountryListItems
     }.singleton
   }
 
   var refreshCountryListItems: Factory<RefreshCountryListItems> {
     self {
-      DefaultRefreshCountryListItems(refreshCountryListItems: KoinDomainHelper.shared.refreshCountryListItems)
-    }
+      DefaultRefreshCountryListItems(
+        refreshCountryListItems: Container.shared.domainKtRefreshCountryListItems(),
+      )
+    }.singleton
   }
 }

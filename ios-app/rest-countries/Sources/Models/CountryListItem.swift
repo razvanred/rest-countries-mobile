@@ -5,8 +5,8 @@
 //  Created by Răzvan Roşu on 13/08/25.
 //
 
-struct CountryListItem: Identifiable, Hashable {
-  let id: CountryId
-  let officialName: String
-  let emojiFlag: String
+public struct CountryListItem: Identifiable, Hashable {
+  public let id: CountryId
+  public let officialName: String
+  public let emojiFlag: String
 }

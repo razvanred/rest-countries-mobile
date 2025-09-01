@@ -7,14 +7,16 @@
 import FactoryKit
 import SwiftUI
 
-struct CountriesView: View {
+public struct CountriesView: View {
   @State
   private var isInitialRefreshCompleted: Bool = false
 
   @StateObject
   private var viewModel = CountriesViewModel()
 
-  var body: some View {
+  public init() {}
+
+  public var body: some View {
     List(viewModel.countries) { country in
       NavigationLink(
         destination: CountryDetailsView(countryId: country.id)

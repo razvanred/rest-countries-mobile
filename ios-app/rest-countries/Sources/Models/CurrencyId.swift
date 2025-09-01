@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct CurrencyId: Hashable {
-  let value: String
+public struct CurrencyId: Hashable {
+  public let value: String
 }

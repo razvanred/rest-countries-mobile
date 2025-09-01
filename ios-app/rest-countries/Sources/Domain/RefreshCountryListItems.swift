@@ -8,7 +8,7 @@
 import DomainKt
 import Foundation
 
-protocol RefreshCountryListItems {
+public protocol RefreshCountryListItems {
   func callAsFunction() async throws(NetworkError)
 }
 

@@ -5,24 +5,24 @@
 //  Created by Răzvan Roşu on 13/08/25.
 //
 
-struct DetailedCountry: Identifiable, Hashable {
-  let id: CountryId
-  let officialName: String
-  let commonName: String
-  let emojiFlag: String
-  let flag: Flag
-  let currencies: [Currency]
-  let capital: [String]
-  let continents: [String]
-  let languages: [Language]
+public struct DetailedCountry: Identifiable, Hashable {
+  public let id: CountryId
+  public let officialName: String
+  public let commonName: String
+  public let emojiFlag: String
+  public let flag: Flag
+  public let currencies: [Currency]
+  public let capital: [String]
+  public let continents: [String]
+  public let languages: [Language]
 
-  var isOfficialNameDifferentFromCommon: Bool {
+  public var isOfficialNameDifferentFromCommon: Bool {
     !(officialName.caseInsensitiveCompare(commonName) == .orderedSame)
   }
 
-  struct Flag: Hashable {
-    let png: String
-    let svg: String
-    let contentDescription: String
+  public struct Flag: Hashable {
+    public let png: String
+    public let svg: String
+    public let contentDescription: String
   }
 }
