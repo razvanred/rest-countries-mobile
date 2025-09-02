@@ -24,6 +24,7 @@ kotlin {
         implementation(libs.ktor.client.core)
         implementation(libs.ktor.client.logging)
         implementation(libs.ktor.client.contentnegotiation)
+        implementation(libs.kermit)
         implementation(projects.commons.intellijAnnotations)
         api(libs.koin.core)
       }
