@@ -5,21 +5,10 @@ package red.razvan.restcountries.data.remote
 
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.engine.darwin.Darwin
-import io.ktor.client.plugins.logging.Logger
 import org.koin.dsl.module
 
 internal actual val PlatformModule = module {
   single<HttpClientEngine> {
     Darwin.create()
-  }
-
-  single<Logger> {
-    AppleLogger
-  }
-}
-
-private object AppleLogger : Logger {
-  override fun log(message: String) {
-    println("[HttpClient] $message")
   }
 }
