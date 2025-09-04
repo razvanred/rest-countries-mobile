@@ -2,5 +2,5 @@
 <resources>
     <string name="more_options_button_cd">More options</string>
     <string name="refresh_item_label">Refresh</string>
-    <string name="navigate_up_button_cd">Go back</string>
+    <string name="navigate_up_button_cd">Back</string>
 </resources>

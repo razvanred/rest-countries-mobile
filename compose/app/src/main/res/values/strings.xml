@@ -2,8 +2,6 @@
 <resources>
     <string name="countries_list_screen_title">Countries</string>
 
-    <string name="refresh_item_label">Refresh</string>
-
     <string name="country_details_screen_title">Country</string>
     <string name="country_details_country_common_name_label">Also known as %s</string>
     <plurals name="country_details_screen_languages_property_title">
