@@ -40,4 +40,35 @@ internal fun Project.configureAndroid() {
   }
 }
 
+data class AndroidAppVersion(
+  val code: Int,
+  val name: String,
+) {
+  companion object {
+
+    /**
+     * @param major Major version
+     * @param minor Minor version (up to 99)
+     * @param patch Patch version (up to 99)
+     * @param build For dogfood builds, public betas, etc. (up to 9)
+     */
+    fun build(
+      major: Int,
+      minor: Int,
+      patch: Int,
+      build: Int = 0,
+    ): AndroidAppVersion {
+      require(major >= 0) { "Invalid major version number: $major" }
+      require(minor in 0..99) { "Invalid minor version number: $minor" }
+      require(patch in 0..99) { "Invalid patch version number: $patch" }
+      require(build in 0..9) { "Invalid build version number: $build" }
+
+      return AndroidAppVersion(
+        code = major * 1_00_00_0 + minor * 1_00_0 + patch * 1_0 + build,
+        name = "$major.$minor.$patch",
+      )
+    }
+  }
+}
+
 private fun Project.android(action: BaseExtension.() -> Unit) = extensions.configure<BaseExtension>(action)

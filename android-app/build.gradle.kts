@@ -1,10 +1,13 @@
 // Copyright 2025 Răzvan Roșu
 // SPDX-License-Identifier: Apache-2.0
 
+import red.razvan.restcountries.gradle.AndroidAppVersion
+
 plugins {
   id("red.razvan.restcountries.android.application")
   id("red.razvan.restcountries.android.application.compose")
   id("red.razvan.restcountries.kotlin.android")
+  alias(libs.plugins.localproperties)
 }
 
 android {
@@ -17,12 +20,26 @@ android {
       keyAlias = "debug"
       keyPassword = "android"
     }
+
+    file("secrets/release.jks")
+      .takeIf(File::exists)
+      ?.let { releaseStoreFile ->
+        create("release") {
+          storeFile = releaseStoreFile
+          storePassword = properties["ANDROID_RELEASE_KEYSTORE_PASSWORD"]?.toString().orEmpty()
+          keyAlias = "rest-countries"
+          keyPassword = properties["ANDROID_RELEASE_KEY_PASSWORD"]?.toString().orEmpty()
+        }
+      }
   }
 
   defaultConfig {
     applicationId = "red.razvan.restcountries"
-    versionCode = 1
-    versionName = "1.0"
+
+    AndroidAppVersion.build(major = 1, minor = 0, patch = 0).let { (code, name) ->
+      versionCode = code
+      versionName = name
+    }
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
   }
@@ -30,14 +47,15 @@ android {
   buildTypes {
     release {
       isMinifyEnabled = false
-      signingConfig = signingConfigs.getByName("debug")
+      signingConfig = signingConfigs.findByName("release") ?: signingConfigs["debug"]
       proguardFiles(
         getDefaultProguardFile("proguard-android-optimize.txt"),
         "proguard-rules.pro",
       )
     }
     debug {
-      signingConfig = signingConfigs.getByName("debug")
+      signingConfig = signingConfigs["debug"]
+      applicationIdSuffix = ".debug"
     }
   }
 }
