@@ -30,7 +30,7 @@ The _one and only_ mobile application that displays the countries from the [REST
 
 ## 🌟 Tech stack
 
-### 🏛️ Multiplatform foundation
+### 🏛️ A Multiplatform foundation
 
 - 🛂 Separated Gradle subprojects for each data layer
 - 💉 **Dependency Injection** through [Koin](https://github.com/InsertKoinIO/koin)
@@ -63,17 +63,28 @@ The _one and only_ mobile application that displays the countries from the [REST
 - 📦 **Remote dependencies management** through [Swift Package Manager](https://github.com/swiftlang/swift-package-manager)
 - 🧰 **Xcode configuration files management** through [Tuist](https://github.com/tuist/tuist)
 
-## 🛣 Roadmap for `1.0`
+## 🚀 Get started
 
-- [x] Enhance `README.md` with device screenshots
-- [x] Create more instrumented tests
-- [ ] Work on Compose performance optimizations
-- [x] Migrate `:data:repository` layer to [Store](https://github.com/MobileNativeFoundation/Store)
-- [x] Delete orphan columns from `language`, `continent`, `currency`, `capital` tables by creating a database trigger
-- [x] Move common modules to [Kotlin Multiplatform](https://www.jetbrains.com/kotlin-multiplatform/)
-- [x] Create iOS application & UI implementation with [SwiftUI](https://developer.apple.com/swiftui/)
-- [ ] Validate external libraries licenses through [Licensee](https://github.com/cashapp/licensee)
-- [ ] Create a proper CD pipeline
+For the **Android** app, just open the root folder with [Android Studio](https://developer.android.com/studio), and make sure you are using the proper version by checking the [Android Gradle plugin and Android Studio compatibility](https://developer.android.com/build/releases/gradle-plugin#android_gradle_plugin_and_android_studio_compatibility) matrix.
+
+For **iOS**, as mentioned above, we are using [Tuist](https://github.com/tuist/tuist) to generate the Xcode project file. In order to open the project, run the following commands from the project root folder:
+
+```zsh
+cd ios-app
+mise install # Make sure you have Mise En Place installed on your machine
+tuist install # Downloads the needed dependencies for the project
+tuist generate # Opens the project on Xcode
+```
+
+### 🪝 Git Hooks
+
+This step is recommended if you intend to contribute to the project.
+
+To check the code formatting before committing your working copy, you can locally configure the Git Hooks available from this repository:
+
+```zsh
+git config --local core.hooksPath .githooks
+```
 
 ## 💟 Huge thanks to…
 
