@@ -14,6 +14,7 @@ import kotlinx.coroutines.test.setMain
 import org.junit.BeforeClass
 import org.junit.Rule
 import org.junit.Test
+import org.koin.dsl.module
 import org.koin.test.KoinTest
 import org.koin.test.KoinTestRule
 import org.koin.test.inject
@@ -37,30 +38,36 @@ internal class CountriesScreenViewModelTests : KoinTest {
     fun configureBeforeAll() {
       Dispatchers.setMain(StandardTestDispatcher())
     }
+
+    private val CachedCountries = CountryListItems.All
+
+    private val MocksModule = module {
+      single<ObserveCountryListItems> {
+        SampleDataObserveCountryListItems(
+          data = CachedCountries,
+          emitDelayInMillis = 100L,
+        )
+      }
+    }
   }
 
   @get:Rule
   val koinTestRule = KoinTestRule.create {
-    modules(AppModule)
+    modules(AppModule, MocksModule)
   }
 
   private val viewModel: CountriesScreenViewModel by inject()
 
   @Test
-  fun `Given a successful refresh and the cached data emitted beforehand, check the UI state`() = runTest {
-    declare<ObserveCountryListItems> {
-      SampleDataObserveCountryListItems(100L)
-    }
+  fun `Given a successful refresh with cached data, check the UI state`() = runTest {
     declare<RefreshCountryListItems> {
       SuccessfulRefreshCountryListItems(200L)
     }
 
     val expectedInitialState = CountriesScreenUiState.Empty
     val expectedRefreshingState = expectedInitialState
-      .copy(isRefreshing = true)
-    val expectedRefreshingWithCachedDataState = expectedRefreshingState
-      .copy(items = CountryListItems.All)
-    val expectedLoadedState = expectedRefreshingWithCachedDataState
+      .copy(isRefreshing = true, items = CachedCountries)
+    val expectedRefreshedState = expectedRefreshingState
       .copy(isRefreshing = false)
 
     viewModel
@@ -68,35 +75,31 @@ internal class CountriesScreenViewModelTests : KoinTest {
       .test {
         assertThat(awaitItem()).isEqualTo(expectedInitialState)
         assertThat(awaitItem()).isEqualTo(expectedRefreshingState)
-        assertThat(awaitItem()).isEqualTo(expectedRefreshingWithCachedDataState)
-        assertThat(awaitItem()).isEqualTo(expectedLoadedState)
+        assertThat(awaitItem()).isEqualTo(expectedRefreshedState)
       }
   }
 
-  @Suppress("UnnecessaryVariable")
   @Test
-  fun `Given a successful refresh and the data emitted later, check the UI state`() = runTest {
-    declare<ObserveCountryListItems> {
-      SampleDataObserveCountryListItems(200L)
-    }
+  fun `Given a successful refresh without cached data, check the UI state`() = runTest {
     declare<RefreshCountryListItems> {
-      SuccessfulRefreshCountryListItems(100L)
+      SuccessfulRefreshCountryListItems(200L)
+    }
+    declare<ObserveCountryListItems> {
+      EmptyObserveCountryListItems()
     }
 
     val expectedInitialState = CountriesScreenUiState.Empty
     val expectedRefreshingState = expectedInitialState
       .copy(isRefreshing = true)
-    val expectedRefreshedWithoutCachedDataState = expectedInitialState
-    val expectedLoadedState = expectedRefreshedWithoutCachedDataState
-      .copy(items = CountryListItems.All)
+    val expectedRefreshedState = expectedRefreshingState
+      .copy(isRefreshing = false)
 
     viewModel
       .state
       .test {
         assertThat(awaitItem()).isEqualTo(expectedInitialState)
         assertThat(awaitItem()).isEqualTo(expectedRefreshingState)
-        assertThat(awaitItem()).isEqualTo(expectedRefreshedWithoutCachedDataState)
-        assertThat(awaitItem()).isEqualTo(expectedLoadedState)
+        assertThat(awaitItem()).isEqualTo(expectedRefreshedState)
       }
   }
 
@@ -119,10 +122,8 @@ internal class CountriesScreenViewModelTests : KoinTest {
 
     val expectedInitialState = CountriesScreenUiState.Empty
     val expectedRefreshingState = expectedInitialState
-      .copy(isRefreshing = true)
-    val expectedRefreshingWithCachedDataState = expectedRefreshingState
-      .copy(items = CountryListItems.All)
-    val expectedLoadedState = expectedRefreshingWithCachedDataState
+      .copy(isRefreshing = true, items = CachedCountries)
+    val expectedRefreshedState = expectedRefreshingState
       .copy(
         networkFailure = expectedNetworkFailure,
         isRefreshing = false,
@@ -133,14 +134,12 @@ internal class CountriesScreenViewModelTests : KoinTest {
       .test {
         assertThat(awaitItem()).isEqualTo(expectedInitialState)
         assertThat(awaitItem()).isEqualTo(expectedRefreshingState)
-        assertThat(awaitItem()).isEqualTo(expectedRefreshingWithCachedDataState)
-        awaitItem()
-        assertThat(awaitItem()).isEqualTo(expectedLoadedState)
+        assertThat(awaitItem()).isEqualTo(expectedRefreshedState)
       }
   }
 
   @Test
-  fun `Given a failing refresh without emitted cached data, check the UI state`() = runTest {
+  fun `Given a failing refresh without cached data, check the UI state`() = runTest {
     val expectedNetworkFailure = NetworkFailure.WithHttpStatusCode(
       code = 400,
       exception = RuntimeException("test"),
@@ -159,7 +158,7 @@ internal class CountriesScreenViewModelTests : KoinTest {
     val expectedInitialState = CountriesScreenUiState.Empty
     val expectedRefreshingState = expectedInitialState
       .copy(isRefreshing = true)
-    val expectedLoadedState = expectedRefreshingState
+    val expectedRefreshedState = expectedRefreshingState
       .copy(
         isRefreshing = false,
         networkFailure = expectedNetworkFailure,
@@ -170,8 +169,7 @@ internal class CountriesScreenViewModelTests : KoinTest {
       .test {
         assertThat(awaitItem()).isEqualTo(expectedInitialState)
         assertThat(awaitItem()).isEqualTo(expectedRefreshingState)
-        awaitItem()
-        assertThat(awaitItem()).isEqualTo(expectedLoadedState)
+        assertThat(awaitItem()).isEqualTo(expectedRefreshedState)
       }
   }
 }

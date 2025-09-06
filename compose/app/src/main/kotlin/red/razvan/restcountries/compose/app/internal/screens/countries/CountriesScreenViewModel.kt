@@ -21,13 +21,6 @@ internal class CountriesScreenViewModel(
   private val refreshCountryListItems: RefreshCountryListItems,
 ) : ViewModel() {
 
-  private val countries = observeCountryListItems()
-    .stateIn(
-      scope = viewModelScope,
-      started = SharingStarted.WhileSubscribed(500),
-      initialValue = emptyList(),
-    )
-
   private val mutableIsRefreshing = MutableStateFlow(false)
   private val isRefreshing = mutableIsRefreshing.asStateFlow()
 
@@ -38,7 +31,7 @@ internal class CountriesScreenViewModel(
   private val isDropdownMenuExpanded = mutableIsDropdownMenuExpanded.asStateFlow()
 
   val state = combine(
-    countries,
+    observeCountryListItems(),
     isRefreshing,
     networkFailure,
     isDropdownMenuExpanded,
@@ -50,6 +43,11 @@ internal class CountriesScreenViewModel(
       isDropdownMenuExpanded = isDropdownMenuExpanded,
     )
   }
+    .stateIn(
+      scope = viewModelScope,
+      started = SharingStarted.WhileSubscribed(5_000),
+      initialValue = CountriesScreenUiState.Empty,
+    )
 
   init {
     refresh()

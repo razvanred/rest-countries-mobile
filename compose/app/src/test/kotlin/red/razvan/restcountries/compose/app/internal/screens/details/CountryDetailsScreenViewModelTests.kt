@@ -45,7 +45,7 @@ class CountryDetailsScreenViewModelTests : KoinTest {
   }
 
   @Test
-  fun `Given a successful refresh and the cached data emitted beforehand, check the UI state`() = runTest {
+  fun `Given a successful refresh with cached data, check the UI state`() = runTest {
     val expectedCountry = DetailedCountries.Italy
 
     declare<ObserveDetailedCountryByIdOrNull> {
@@ -57,10 +57,8 @@ class CountryDetailsScreenViewModelTests : KoinTest {
 
     val expectedInitialState = CountryDetailsUiState.Empty
     val expectedRefreshingState = expectedInitialState
-      .copy(isRefreshing = true)
-    val expectedRefreshingWithCachedDataState = expectedRefreshingState
-      .copy(country = expectedCountry)
-    val expectedLoadedState = expectedRefreshingWithCachedDataState
+      .copy(isRefreshing = true, country = expectedCountry)
+    val expectedRefreshedState = expectedRefreshingState
       .copy(isRefreshing = false)
 
     get<CountryDetailsScreenViewModel> { parametersOf(expectedCountry.id) }
@@ -68,42 +66,38 @@ class CountryDetailsScreenViewModelTests : KoinTest {
       .test {
         assertThat(awaitItem()).isEqualTo(expectedInitialState)
         assertThat(awaitItem()).isEqualTo(expectedRefreshingState)
-        assertThat(awaitItem()).isEqualTo(expectedRefreshingWithCachedDataState)
-        assertThat(awaitItem()).isEqualTo(expectedLoadedState)
+        assertThat(awaitItem()).isEqualTo(expectedRefreshedState)
       }
   }
 
   @Test
-  fun `Given a successful refresh and the cached data emitted later, check the UI state`() = runTest {
-    val expectedCountry = DetailedCountries.Italy
-
+  fun `Given a successful refresh without cached data, check the UI state`() = runTest {
     declare<ObserveDetailedCountryByIdOrNull> {
-      SampleDataObserveDetailedCountryByIdOrNull(resultEmitDelayInMillis = 300L)
+      SampleDataObserveDetailedCountryByIdOrNull()
     }
     declare<RefreshDetailedCountryById> {
-      SuccessfulRefreshDetailedCountryById(emitDelayInMillis = 100L)
+      SuccessfulRefreshDetailedCountryById(emitDelayInMillis = 200L)
     }
 
     val expectedInitialState = CountryDetailsUiState.Empty
     val expectedRefreshingState = expectedInitialState
       .copy(isRefreshing = true)
-    val expectedRefreshedWithoutCachedDataState = expectedRefreshingState
-      .copy(isRefreshing = false)
-    val loadedState = expectedRefreshedWithoutCachedDataState
-      .copy(country = expectedCountry)
+    val expectedRefreshedState = expectedRefreshingState
+      .copy(
+        isRefreshing = false,
+      )
 
-    get<CountryDetailsScreenViewModel> { parametersOf(expectedCountry.id) }
+    get<CountryDetailsScreenViewModel> { parametersOf(DetailedCountries.UnknownCountryId) }
       .state
       .test {
         assertThat(awaitItem()).isEqualTo(expectedInitialState)
         assertThat(awaitItem()).isEqualTo(expectedRefreshingState)
-        assertThat(awaitItem()).isEqualTo(expectedRefreshedWithoutCachedDataState)
-        assertThat(awaitItem()).isEqualTo(loadedState)
+        assertThat(awaitItem()).isEqualTo(expectedRefreshedState)
       }
   }
 
   @Test
-  fun `Given a failing refresh and the cached data emitted, check the UI state`() = runTest {
+  fun `Given a failing refresh with cached data, check the UI state`() = runTest {
     val expectedNetworkFailure = NetworkFailure.WithHttpStatusCode(
       code = 400,
       exception = RuntimeException("test"),
@@ -122,12 +116,8 @@ class CountryDetailsScreenViewModelTests : KoinTest {
 
     val expectedInitialState = CountryDetailsUiState.Empty
     val expectedRefreshingState = expectedInitialState
-      .copy(isRefreshing = true)
-    val expectedRefreshingWithCachedDataState = expectedRefreshingState
-      .copy(
-        country = expectedCountry,
-      )
-    val expectedLoadedState = expectedRefreshingWithCachedDataState
+      .copy(isRefreshing = true, country = expectedCountry)
+    val expectedRefreshedState = expectedRefreshingState
       .copy(
         networkFailure = expectedNetworkFailure,
         isRefreshing = false,
@@ -138,14 +128,12 @@ class CountryDetailsScreenViewModelTests : KoinTest {
       .test {
         assertThat(awaitItem()).isEqualTo(expectedInitialState)
         assertThat(awaitItem()).isEqualTo(expectedRefreshingState)
-        assertThat(awaitItem()).isEqualTo(expectedRefreshingWithCachedDataState)
-        awaitItem()
-        assertThat(awaitItem()).isEqualTo(expectedLoadedState)
+        assertThat(awaitItem()).isEqualTo(expectedRefreshedState)
       }
   }
 
   @Test
-  fun `Given a failing refresh without emitted cached data, check the UI state`() = runTest {
+  fun `Given a failing refresh without cached data, check the UI state`() = runTest {
     val expectedNetworkFailure = NetworkFailure.Undefined(exception = RuntimeException("Test"))
 
     declare<ObserveDetailedCountryByIdOrNull> {
@@ -158,7 +146,7 @@ class CountryDetailsScreenViewModelTests : KoinTest {
     val expectedInitialState = CountryDetailsUiState.Empty
     val expectedRefreshingState = expectedInitialState
       .copy(isRefreshing = true)
-    val expectedLoadedState = expectedRefreshingState
+    val expectedRefreshedState = expectedRefreshingState
       .copy(
         isRefreshing = false,
         networkFailure = expectedNetworkFailure,
@@ -169,8 +157,7 @@ class CountryDetailsScreenViewModelTests : KoinTest {
       .test {
         assertThat(awaitItem()).isEqualTo(expectedInitialState)
         assertThat(awaitItem()).isEqualTo(expectedRefreshingState)
-        awaitItem()
-        assertThat(awaitItem()).isEqualTo(expectedLoadedState)
+        assertThat(awaitItem()).isEqualTo(expectedRefreshedState)
       }
   }
 }
