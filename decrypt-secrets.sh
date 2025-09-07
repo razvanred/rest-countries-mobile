@@ -23,7 +23,7 @@ decrypt() {
 
 if [[ ! -z "$REST_COUNTRIES_MOBILE_SECRETS_ENCRYPT_KEY" ]]; then
   # Decrypt Android app Release key
-  decrypt ${REST_COUNTRIES_MOBILE_SECRETS_ENCRYPT_KEY} android-app/secrets/release.gpg android-app/secrets/release.jks
+  decrypt ${REST_COUNTRIES_MOBILE_SECRETS_ENCRYPT_KEY} android/app/secrets/release.gpg android/app/secrets/release.jks
 else
   echo "REST_COUNTRIES_MOBILE_SECRETS_ENCRYPT_KEY is empty"
 fi

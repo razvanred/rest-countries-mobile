@@ -15,4 +15,4 @@
 # limitations under the License.
 
 # Delete Android app Release key
-rm -f android-app/secrets/release.jks
+rm -f android/app/secrets/release.jks

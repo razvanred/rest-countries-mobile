@@ -35,10 +35,10 @@ plugins {
 
 rootProject.name = "rest-countries-mobile"
 
-include(":android-app")
+include(":android:app")
 
-include(":compose:app")
-include(":compose:design")
+include(":android:compose:app")
+include(":android:compose:design")
 
 include(":data:remote")
 
