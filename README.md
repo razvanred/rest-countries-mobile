@@ -76,13 +76,31 @@ tuist install # Downloads the needed dependencies for the project
 tuist generate # Opens the project on Xcode
 ```
 
-### 🪝 Git Hooks
+## ✏️ Want to contribute?
 
-This step is recommended if you intend to contribute to the project.
+The following steps are recommended if you want to open a new PR to bring your contribution.
+
+### 🧼 Format your code
+
+If you want to contribute to the **Android** and/or **Kotlin Multiplatform** code, run the following command from the project root folder:
+
+```bash
+./gradlew spotlessApply # or gradlew.bat spotlessApply on Windows
+```
+
+For the **iOS** side, run from the project root folder:
+
+```bash
+cd ios-app
+mise install # Fetches SwiftFormat
+swiftformat .
+```
+
+### 🪝 Git Hooks
 
 To check the code formatting before committing your working copy, you can locally configure the Git Hooks available from this repository:
 
-```zsh
+```bash
 git config --local core.hooksPath .githooks
 ```
 
