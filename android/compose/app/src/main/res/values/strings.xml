@@ -1,31 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="countries_list_screen_title">Countries</string>
+  <string name="countries_list_screen_title">Countries</string>
 
-    <string name="country_details_screen_title">Country</string>
-    <string name="country_details_country_common_name_label">Also known as %s</string>
-    <plurals name="country_details_screen_languages_property_title">
-        <item quantity="one">Language</item>
-        <item quantity="other">Languages</item>
-    </plurals>
-    <plurals name="country_details_screen_continents_property_title">
-        <item quantity="one">Continent</item>
-        <item quantity="other">Continents</item>
-    </plurals>
-    <plurals name="country_details_screen_capital_property_title">
-        <item quantity="one">Capital</item>
-        <item quantity="other">Capitals</item>
-    </plurals>
-    <plurals name="country_details_screen_currencies_property_title">
-        <item quantity="one">Currency</item>
-        <item quantity="other">Currencies</item>
-    </plurals>
-    <string name="country_details_screen_emoji_flag_property_title">Emoji flag</string>
-    <string name="country_details_currencies_property_value">%1$s (%2$s)</string>
+  <string name="country_details_screen_title">Country</string>
+  <string name="country_details_country_common_name_label">Also known as %s</string>
+  <plurals name="country_details_screen_languages_property_title">
+    <item quantity="one">Language</item>
+    <item quantity="other">Languages</item>
+  </plurals>
+  <plurals name="country_details_screen_continents_property_title">
+    <item quantity="one">Continent</item>
+    <item quantity="other">Continents</item>
+  </plurals>
+  <plurals name="country_details_screen_capital_property_title">
+    <item quantity="one">Capital</item>
+    <item quantity="other">Capitals</item>
+  </plurals>
+  <plurals name="country_details_screen_currencies_property_title">
+    <item quantity="one">Currency</item>
+    <item quantity="other">Currencies</item>
+  </plurals>
+  <string name="country_details_screen_emoji_flag_property_title">Emoji flag</string>
+  <string name="country_details_currencies_property_value">%1$s (%2$s)</string>
 
-    <string name="network_failure_client_issues_message">%d - Client issues</string>
-    <string name="network_failure_server_issues_message">%d - Server issues</string>
-    <string name="network_failure_unknown_issues_message">Unknown network error</string>
+  <string name="licenses_screen_title">Licenses</string>
 
-    <string name="retry_button_text">Retry</string>
+  <string name="network_failure_client_issues_message">%d - Client issues</string>
+  <string name="network_failure_server_issues_message">%d - Server issues</string>
+  <string name="network_failure_unknown_issues_message">Unknown network error</string>
+
+  <string name="retry_button_text">Retry</string>
+
+  <string name="licenses_item_label">Open source licenses</string>
 </resources>

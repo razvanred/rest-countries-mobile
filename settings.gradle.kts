@@ -40,6 +40,8 @@ include(":android:app")
 include(":android:compose:app")
 include(":android:compose:design")
 
+include(":android:domain")
+
 include(":data:remote")
 
 include(":data:models")

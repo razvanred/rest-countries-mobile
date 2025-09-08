@@ -26,4 +26,7 @@ internal object NavDestinations {
       fun CountryId.toDestination(): CountryDetailsScreen = CountryDetailsScreen(value)
     }
   }
+
+  @Serializable
+  data object LicensesScreen : NavDestination
 }

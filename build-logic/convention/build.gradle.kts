@@ -30,6 +30,7 @@ dependencies {
   compileOnly(libs.kotlin.gp)
   compileOnly(libs.kotlin.compose.gp)
   compileOnly(libs.spotless.gp)
+  implementation(libs.licensee.gp)
 }
 
 gradlePlugin {
@@ -72,6 +73,11 @@ gradlePlugin {
     register("androidLibraryCompose") {
       id = "red.razvan.restcountries.android.library.compose"
       implementationClass = "red.razvan.restcountries.gradle.AndroidLibraryComposeConventionPlugin"
+    }
+
+    register("licensee") {
+      id = "red.razvan.restcountries.licensee"
+      implementationClass = "red.razvan.restcountries.gradle.LicenseeConventionPlugin"
     }
   }
 }

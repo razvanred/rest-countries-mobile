@@ -15,4 +15,5 @@ plugins {
   alias(libs.plugins.paparazzi) apply false
   alias(libs.plugins.spotless) apply false
   alias(libs.plugins.skie) apply false
+  alias(libs.plugins.licensee) apply false
 }

@@ -12,9 +12,14 @@ import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Code
+import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
 import androidx.compose.material3.LargeTopAppBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Snackbar
@@ -53,6 +58,7 @@ import red.razvan.restcountries.data.models.CountryListItem
 @Composable
 internal fun CountriesScreen(
   onNavigateToCountryDetails: (CountryId) -> Unit,
+  onNavigateToLicenses: () -> Unit,
   modifier: Modifier = Modifier,
   viewModel: CountriesScreenViewModel = koinViewModel(),
 ) {
@@ -67,6 +73,7 @@ internal fun CountriesScreen(
     onNavigateToCountryDetails = onNavigateToCountryDetails,
     onNetworkFailureMessageDismissal = viewModel::clearNetworkFailure,
     onDropdownMenuExpandedChange = viewModel::setDropdownMenuExpanded,
+    onNavigateToLicenses = onNavigateToLicenses,
   )
 }
 
@@ -78,6 +85,7 @@ internal fun CountriesScreen(
   onRefresh: () -> Unit,
   onNetworkFailureMessageDismissal: () -> Unit,
   onNavigateToCountryDetails: (CountryId) -> Unit,
+  onNavigateToLicenses: () -> Unit,
   modifier: Modifier = Modifier,
 ) {
   val topAppBarScrollBehavior = TopAppBarDefaults
@@ -129,6 +137,13 @@ internal fun CountriesScreen(
                 onClick = {
                   onDropdownMenuExpandedChange(false)
                   onRefresh()
+                },
+              )
+              HorizontalDivider()
+              LicensesDropdownMenuItem(
+                onClick = {
+                  onDropdownMenuExpandedChange(false)
+                  onNavigateToLicenses()
                 },
               )
             }
@@ -209,6 +224,26 @@ private fun CountriesLazyColumn(
   }
 }
 
+@Composable
+private fun LicensesDropdownMenuItem(
+  onClick: () -> Unit,
+  modifier: Modifier = Modifier,
+) {
+  DropdownMenuItem(
+    text = {
+      Text(text = stringResource(R.string.licenses_item_label))
+    },
+    leadingIcon = {
+      Icon(
+        imageVector = Icons.Default.Code,
+        contentDescription = null,
+      )
+    },
+    onClick = onClick,
+    modifier = modifier,
+  )
+}
+
 @Preview(showBackground = true)
 @Composable
 private fun CountriesScreenPreview() {
@@ -240,6 +275,7 @@ private fun CountriesScreenPreview() {
       onNavigateToCountryDetails = {},
       onNetworkFailureMessageDismissal = {},
       onDropdownMenuExpandedChange = {},
+      onNavigateToLicenses = {},
     )
   }
 }

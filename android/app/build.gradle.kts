@@ -7,6 +7,7 @@ plugins {
   id("red.razvan.restcountries.android.application")
   id("red.razvan.restcountries.android.application.compose")
   id("red.razvan.restcountries.kotlin.android")
+  id("red.razvan.restcountries.licensee")
   alias(libs.plugins.localproperties)
 }
 

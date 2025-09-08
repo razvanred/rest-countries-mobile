@@ -192,6 +192,7 @@ class CountriesScreenTests : KoinTest {
     RestCountriesTheme {
       CountriesScreen(
         onNavigateToCountryDetails = {},
+        onNavigateToLicenses = {},
         modifier = modifier,
       )
     }
