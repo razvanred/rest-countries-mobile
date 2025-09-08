@@ -24,15 +24,18 @@ dependencies {
   implementation(libs.androidx.compose.ui)
   implementation(libs.androidx.compose.ui.graphics)
   implementation(libs.androidx.compose.ui.tooling.preview)
+  implementation(libs.androidx.compose.material.icons.extended)
 
   implementation(libs.androidx.navigation.compose)
   implementation(libs.kotlinx.serialization.json)
+  implementation(libs.androidx.browser)
 
   // region DI modules
   implementation(libs.koin.androidx.compose)
   implementation(libs.koin.compose.viewmodel)
   implementation(libs.koin.compose.viewmodel.navigation)
   implementation(projects.domain)
+  implementation(projects.android.domain)
   // endregion
 
   // region Testing

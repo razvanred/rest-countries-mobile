@@ -18,6 +18,7 @@ kotlinx-serialization = "1.9.0"
 assertk = "0.28.1"
 spotless = "7.2.1"
 ktlint = "1.7.0"
+licensee = "1.13.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -35,11 +36,14 @@ androidx-test-core-ktx = { group = "androidx.test", name = "core-ktx", version =
 android-material = "com.google.android.material:material:1.13.0"
 android-tools-desugar = { group = "com.android.tools", name = "desugar_jdk_libs", version = "2.1.5" }
 
+androidx-browser = "androidx.browser:browser:1.9.0"
+
 androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
 androidx-compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+androidx-compose-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
 
 androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
@@ -102,6 +106,7 @@ android-gp = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 kotlin-gp = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-compose-gp = { module = "org.jetbrains.kotlin.plugin.compose:org.jetbrains.kotlin.plugin.compose.gradle.plugin", version.ref = "kotlin" }
 spotless-gp = { module = "com.diffplug.spotless:spotless-plugin-gradle", version.ref = "spotless" }
+licensee-gp = { module = "app.cash.licensee:licensee-gradle-plugin", version.ref = "licensee" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -122,3 +127,5 @@ ksp = { id = "com.google.devtools.ksp", version = "2.2.10-2.0.2" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 
 localproperties = { id = "com.github.b3er.local.properties", version = "1.1" }
+
+licensee = { id = "app.cash.licensee", version.ref = "licensee" }
