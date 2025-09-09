@@ -44,10 +44,12 @@ dependencies {
   androidTestImplementation(projects.testResources.domain)
   androidTestImplementation(libs.assertk)
   androidTestImplementation(projects.testResources.androidKoin)
+  androidTestImplementation(projects.testResources.androidDomain)
   androidTestImplementation(libs.koin.test)
   androidTestImplementation(libs.koin.test.junit4)
   androidTestImplementation(libs.androidx.test.rules)
   androidTestImplementation(libs.androidx.espresso.core)
+  androidTestImplementation(libs.androidx.espresso.intents)
   debugImplementation(libs.androidx.compose.ui.tooling)
   debugImplementation(libs.androidx.compose.ui.test.manifest)
 
@@ -65,6 +67,7 @@ dependencies {
   testImplementation(libs.coil.test)
 
   testImplementation(projects.testResources.domain)
+  testImplementation(projects.testResources.androidDomain)
   // endregion
 
   implementation(libs.coil.compose)
