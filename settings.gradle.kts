@@ -61,3 +61,4 @@ include(":commons:intellij-annotations")
 
 include(":test-resources:domain")
 include(":test-resources:android-koin")
+include(":test-resources:android-domain")

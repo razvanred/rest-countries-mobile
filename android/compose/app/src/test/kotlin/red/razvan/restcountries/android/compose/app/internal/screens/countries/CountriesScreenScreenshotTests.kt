@@ -156,6 +156,7 @@ class CountriesScreenScreenshotTests {
         onNetworkFailureMessageDismissal = {},
         onRefresh = {},
         onNavigateToCountryDetails = {},
+        onNavigateToLicenses = {},
         onDropdownMenuExpandedChange = {},
       )
     }

@@ -13,32 +13,6 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.decodeFromStream
 import red.razvan.restcountries.core.kotlinx.coroutines.AppCoroutineDispatchers
 
-fun interface ObserveArtifacts {
-  operator fun invoke(): Flow<List<ArtifactsGroup>>
-}
-
-@Serializable
-internal data class SerializableArtifact(
-  override val groupId: String,
-  override val artifactId: String,
-  override val version: String,
-  override val spdxLicenses: List<SerializableSpdxLicense>?,
-  override val name: String?,
-  override val scm: SerializableScm?,
-) : Artifact
-
-@Serializable
-internal data class SerializableSpdxLicense(
-  override val identifier: String,
-  override val name: String,
-  override val url: String,
-) : SpdxLicense
-
-@Serializable
-internal data class SerializableScm(
-  override val url: String,
-) : Scm
-
 @OptIn(ExperimentalSerializationApi::class)
 internal class DefaultObserveArtifacts(
   private val dispatchers: AppCoroutineDispatchers,
@@ -70,3 +44,25 @@ internal class DefaultObserveArtifacts(
     emit(groups)
   }
 }
+
+@Serializable
+internal data class SerializableArtifact(
+  override val groupId: String,
+  override val artifactId: String,
+  override val version: String,
+  override val spdxLicenses: List<SerializableSpdxLicense>?,
+  override val name: String?,
+  override val scm: SerializableScm?,
+) : Artifact
+
+@Serializable
+internal data class SerializableSpdxLicense(
+  override val identifier: String,
+  override val name: String,
+  override val url: String,
+) : SpdxLicense
+
+@Serializable
+internal data class SerializableScm(
+  override val url: String,
+) : Scm

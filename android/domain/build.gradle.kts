@@ -8,6 +8,7 @@ plugins {
 }
 
 kotlin {
+  jvm()
   androidTarget()
 
   sourceSets {
@@ -15,13 +16,13 @@ kotlin {
       dependencies {
         api(libs.kotlinx.coroutines.core)
         implementation(projects.core.kotlinxCoroutines)
-        implementation(libs.kotlinx.serialization.json)
       }
     }
 
     val androidMain by getting {
       dependencies {
         api(libs.koin.android)
+        implementation(libs.kotlinx.serialization.json)
       }
     }
   }
