@@ -224,9 +224,9 @@ private fun CountryDetailsContent(
 ) {
   Column(
     modifier = modifier
-      .padding(contentPadding)
       .fillMaxSize()
-      .verticalScroll(rememberScrollState()),
+      .verticalScroll(rememberScrollState())
+      .padding(contentPadding),
   ) {
     AsyncImage(
       model = country.flag.svg,
