@@ -34,6 +34,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.koin.androidx.compose.koinViewModel
 import red.razvan.restcountries.android.compose.app.R
 import red.razvan.restcountries.android.compose.design.NavigateUpButton
+import red.razvan.restcountries.android.compose.design.toContainerAndContentPadding
 import red.razvan.restcountries.android.domain.Artifact
 import red.razvan.restcountries.android.domain.ArtifactsGroup
 
@@ -83,15 +84,7 @@ internal fun LicensesScreen(
       )
     },
   ) { padding ->
-    val contentPadding = with(padding) {
-      val layoutDirection = LocalLayoutDirection.current
-      PaddingValues(
-        top = 0.dp,
-        bottom = calculateBottomPadding(),
-        start = calculateStartPadding(layoutDirection),
-        end = calculateEndPadding(layoutDirection),
-      )
-    }
+    val (containerPadding, contentPadding) = padding.toContainerAndContentPadding()
 
     LicensesLazyColumn(
       contentPadding = contentPadding,
@@ -102,7 +95,7 @@ internal fun LicensesScreen(
         }
       },
       modifier = Modifier
-        .padding(top = padding.calculateTopPadding()),
+        .padding(containerPadding),
     )
   }
 }
