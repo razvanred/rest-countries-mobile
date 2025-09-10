@@ -22,7 +22,7 @@ internal fun Project.configureAndroidCompose(commonExtension: CommonExtension<*,
         metricsDestination.set(composeReports)
       }
 
-      stabilityConfigurationFiles.add(project.layout.projectDirectory.file("compose-stability.conf"))
+      stabilityConfigurationFiles.add(rootProject.layout.projectDirectory.file("android/compose/compose-stability.conf"))
     }
 
     dependencies {
