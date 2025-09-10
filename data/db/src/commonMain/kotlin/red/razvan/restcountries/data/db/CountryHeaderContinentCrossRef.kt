@@ -7,6 +7,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.ForeignKey.Companion.CASCADE
+import androidx.room.Index
 
 @Entity(
   tableName = "country_header_continent_cross_ref",
@@ -25,6 +26,12 @@ import androidx.room.ForeignKey.Companion.CASCADE
       childColumns = ["continent_name"],
       onDelete = CASCADE,
       onUpdate = CASCADE,
+    ),
+  ],
+  indices = [
+    Index(
+      name = "index_country_header_continent_cross_ref_continent_name",
+      value = ["continent_name"],
     ),
   ],
 )
