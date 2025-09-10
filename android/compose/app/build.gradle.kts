@@ -38,6 +38,8 @@ dependencies {
   implementation(projects.android.domain)
   // endregion
 
+  implementation(projects.testResources.androidDomain)
+
   // region Testing
   androidTestImplementation(libs.androidx.test.ext.junit.ktx)
   androidTestImplementation(libs.androidx.compose.ui.test.junit4)

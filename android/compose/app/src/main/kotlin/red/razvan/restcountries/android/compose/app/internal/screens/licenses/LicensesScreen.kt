@@ -29,14 +29,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.koin.androidx.compose.koinViewModel
 import red.razvan.restcountries.android.compose.app.R
 import red.razvan.restcountries.android.compose.design.NavigateUpButton
+import red.razvan.restcountries.android.compose.design.RestCountriesTheme
 import red.razvan.restcountries.android.compose.design.toContainerAndContentPadding
 import red.razvan.restcountries.android.domain.Artifact
 import red.razvan.restcountries.android.domain.ArtifactsGroup
+import red.razvan.restcountries.testresources.android.domain.SampleData as AndroidSampleData
 
 @Composable
 internal fun LicensesScreen(
@@ -185,5 +188,19 @@ private fun ArtifactItem(
         }
       }
     }
+  }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun LicensesScreenPreview() {
+  RestCountriesTheme {
+    LicensesScreen(
+      onNavigateUp = {},
+      onOpenUrl = {},
+      state = LicensesUiState(
+        artifacts = AndroidSampleData.Artifacts.All,
+      ),
+    )
   }
 }
