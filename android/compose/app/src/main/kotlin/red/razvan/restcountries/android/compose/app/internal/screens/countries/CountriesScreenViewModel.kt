@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -21,14 +20,11 @@ internal class CountriesScreenViewModel(
   private val refreshCountryListItems: RefreshCountryListItems,
 ) : ViewModel() {
 
-  private val mutableIsRefreshing = MutableStateFlow(false)
-  private val isRefreshing = mutableIsRefreshing.asStateFlow()
+  private val isRefreshing = MutableStateFlow(false)
 
-  private val mutableNetworkFailure = MutableStateFlow<NetworkFailure?>(null)
-  private val networkFailure = mutableNetworkFailure.asStateFlow()
+  private val networkFailure = MutableStateFlow<NetworkFailure?>(null)
 
-  private val mutableIsDropdownMenuExpanded = MutableStateFlow(false)
-  private val isDropdownMenuExpanded = mutableIsDropdownMenuExpanded.asStateFlow()
+  private val isDropdownMenuExpanded = MutableStateFlow(false)
 
   val state = combine(
     observeCountryListItems(),
@@ -55,22 +51,22 @@ internal class CountriesScreenViewModel(
 
   fun refresh() {
     viewModelScope.launch {
-      mutableNetworkFailure.emit(null)
+      networkFailure.emit(null)
 
       refreshCountryListItems()
         .collect { status ->
           when (status) {
             is InvokeStatus.Failure<NetworkFailure> -> {
-              mutableNetworkFailure.emit(status.error)
-              mutableIsRefreshing.emit(false)
+              networkFailure.emit(status.error)
+              isRefreshing.emit(false)
             }
 
             InvokeStatus.InProgress -> {
-              mutableIsRefreshing.emit(true)
+              isRefreshing.emit(true)
             }
 
             is InvokeStatus.Successful<*> -> {
-              mutableIsRefreshing.emit(false)
+              isRefreshing.emit(false)
             }
           }
         }
@@ -79,11 +75,11 @@ internal class CountriesScreenViewModel(
 
   fun clearNetworkFailure() {
     viewModelScope.launch {
-      mutableNetworkFailure.emit(null)
+      networkFailure.emit(null)
     }
   }
 
   fun setDropdownMenuExpanded(isExpanded: Boolean) {
-    mutableIsDropdownMenuExpanded.value = isExpanded
+    isDropdownMenuExpanded.value = isExpanded
   }
 }
