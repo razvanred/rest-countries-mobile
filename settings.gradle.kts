@@ -33,7 +33,7 @@ plugins {
   id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
 }
 
-rootProject.name = "rest-countries-mobile"
+rootProject.name = "rest-countries-kmp"
 
 include(":android:app")
 
