@@ -52,7 +52,7 @@ The _one and only_ mobile application that displays the countries from the [REST
 - 🖼️ **Image loading** through [Coil](https://github.com/coil-kt/coil)
 - 📸 **Screenshot testing** using [Paparazzi](https://github.com/cashapp/paparazzi)
 - 🧪 **Unit tests** using [JUnit4](https://github.com/junit-team/junit4)
-- 🦾 [Instrumented tests](https://developer.android.com/training/testing/instrumented-tests) with:
+- ☕️ [Instrumented tests](https://developer.android.com/training/testing/instrumented-tests) with:
   - [AndroidX Compose Testing libraries](https://developer.android.com/develop/ui/compose/testing)
   - [Espresso](https://developer.android.com/training/testing/espresso)
 
@@ -69,11 +69,18 @@ For the **Android** app, just open the root folder with [Android Studio](https:/
 
 For **iOS**, as mentioned above, we are using [Tuist](https://github.com/tuist/tuist) to generate the Xcode project file. In order to open the project, run the following commands from the project root folder:
 
-```zsh
+```bash
 cd ios-app
-mise install # Make sure you have Mise En Place installed on your machine
-tuist install # Downloads the needed dependencies for the project
+mise trust # Trusts the defined packages; make sure you have Mise En Place installed on your machine
+mise install # Installs the needed packages for the environment
+tuist install # Downloads the needed dependencies for the app project
 tuist generate # Opens the project on Xcode
+```
+
+To edit the project configuration, simply run from the `/ios-app` path:
+
+```bash
+tuist edit
 ```
 
 ## ✏️ Want to contribute?
@@ -96,7 +103,7 @@ mise install # Fetches SwiftFormat
 swiftformat .
 ```
 
-### 🪝 Git Hooks
+### 🪝 Configure Git Hooks
 
 To check the code formatting before committing your working copy, you can locally configure the Git Hooks available from this repository:
 
