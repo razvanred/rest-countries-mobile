@@ -25,6 +25,8 @@ if command -v swift >/dev/null 2>&1
     cd ios-app || exit 1
     echo "[pre-commit] Activate Mise"
     eval "$(mise activate bash)"
+    echo "[pre-commit] Trusting Mise packages"
+    mise trust
     echo "[pre-commit] Fetch tools with Mise"
     mise install
     RESULT=$?
