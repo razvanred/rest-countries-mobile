@@ -97,9 +97,6 @@ jobs:
         with:
           cache-disabled: true
 
-      - name: Use Xcode 26.0
-        run: sudo xcode-select -switch /Applications/Xcode_26.0.app
-
       - name: Run unit tests
         working-directory: .
         run: |
