@@ -98,7 +98,7 @@ okhttp-mockwebserver = "com.squareup.okhttp3:mockwebserver3:5.1.0"
 
 ktlint-compose-rules = "io.nlopez.compose.rules:ktlint:0.4.27"
 
-store = "org.mobilenativefoundation.store:store5:5.1.0-alpha06"
+store = "org.mobilenativefoundation.store:store5:5.1.0-alpha07"
 
 kermit = "co.touchlab:kermit:2.0.8"
 
