@@ -4,24 +4,25 @@
 
   <string name="country_details_screen_title">Country</string>
   <string name="country_details_country_common_name_label">Also known as %s</string>
-  <plurals name="country_details_screen_languages_property_title">
+  <plurals name="country_details_screen_languages_cards_title">
     <item quantity="one">Language</item>
     <item quantity="other">Languages</item>
   </plurals>
-  <plurals name="country_details_screen_continents_property_title">
+  <plurals name="country_details_screen_continents_card_title">
     <item quantity="one">Continent</item>
     <item quantity="other">Continents</item>
   </plurals>
-  <plurals name="country_details_screen_capital_property_title">
+  <plurals name="country_details_screen_capitals_card_title">
     <item quantity="one">Capital</item>
     <item quantity="other">Capitals</item>
   </plurals>
-  <plurals name="country_details_screen_currencies_property_title">
+  <plurals name="country_details_screen_currencies_card_title">
     <item quantity="one">Currency</item>
     <item quantity="other">Currencies</item>
   </plurals>
+  <string name="country_details_screen_other_details_card_title">Other details</string>
   <string name="country_details_screen_emoji_flag_property_title">Emoji flag</string>
-  <string name="country_details_currencies_property_value">%1$s (%2$s)</string>
+  <string name="country_details_screen_currency_property_value">%1$s (%2$s)</string>
 
   <string name="licenses_screen_title">Licenses</string>
 
