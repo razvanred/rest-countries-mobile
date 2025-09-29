@@ -3,7 +3,6 @@
 
 package red.razvan.restcountries.android.compose.design
 
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
@@ -15,11 +14,8 @@ import app.cash.paparazzi.Paparazzi
 import com.android.ide.common.rendering.api.SessionParams
 import org.junit.Rule
 import org.junit.Test
-import red.razvan.restcountries.android.compose.design.PropertiesCard
-import red.razvan.restcountries.android.compose.design.Property
-import red.razvan.restcountries.android.compose.design.RestCountriesTheme
 
-class PropertiesCardScreenshotTests {
+class ConnectedCardsGroupScreenshotTests {
 
   @get:Rule
   val paparazzi = Paparazzi(
@@ -46,26 +42,22 @@ class PropertiesCardScreenshotTests {
   }
 
   @Test
-  fun `With title and properties`() {
+  fun `With title and cards`() {
     paparazzi.snapshot {
       TestContent(
         title = {
           TestTitle()
         },
-        properties = {
-          TestProperties()
-        },
+        cards = testCards,
       )
     }
   }
 
   @Test
-  fun `With properties`() {
+  fun `With cards`() {
     paparazzi.snapshot {
       TestContent(
-        properties = {
-          TestProperties()
-        },
+        cards = testCards,
       )
     }
   }
@@ -74,45 +66,44 @@ class PropertiesCardScreenshotTests {
   private fun TestContent(
     modifier: Modifier = Modifier,
     title: (@Composable () -> Unit)? = null,
-    properties: @Composable ColumnScope.() -> Unit = {},
+    cards: List<ConnectableCardProperties> = emptyList(),
   ) {
     RestCountriesTheme {
-      PropertiesCard(
+      ConnectedCardGroup(
         modifier = modifier
           .padding(all = 8.dp)
           .fillMaxWidth(),
         title = title,
-        properties = properties,
+        cards = cards,
       )
     }
   }
 
   @Composable
   private fun TestTitle() {
-    Text(text = "Contacts")
+    Text(text = "Countries")
   }
 
-  @Composable
-  private fun TestProperties() {
-    Property(
-      title = {
-        Text("Phone number")
+  private val testCards = listOf(
+    ConnectableCardProperties(
+      content = {
+        Text(text = "Italy")
       },
-      value = {
-        Text(
-          text = "555-0100",
-        )
+    ),
+    ConnectableCardProperties(
+      content = {
+        Text(text = "Spain")
       },
-    )
-    Property(
-      title = {
-        Text("E-mail address")
+    ),
+    ConnectableCardProperties(
+      content = {
+        Text(text = "France")
       },
-      value = {
-        Text(
-          text = "mail@test.com",
-        )
+    ),
+    ConnectableCardProperties(
+      content = {
+        Text(text = "Germany")
       },
-    )
-  }
+    ),
+  )
 }

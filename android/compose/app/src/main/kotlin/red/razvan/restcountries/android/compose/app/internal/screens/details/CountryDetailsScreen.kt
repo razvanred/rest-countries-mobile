@@ -3,9 +3,11 @@
 
 package red.razvan.restcountries.android.compose.app.internal.screens.details
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -16,6 +18,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ProvideTextStyle
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarHost
@@ -46,15 +49,16 @@ import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 import red.razvan.restcountries.android.compose.app.R
 import red.razvan.restcountries.android.compose.app.internal.mappers.LocalNetworkFailureToMessageMapper
+import red.razvan.restcountries.android.compose.design.ConnectableCardProperties
+import red.razvan.restcountries.android.compose.design.ConnectedCardGroup
 import red.razvan.restcountries.android.compose.design.MoreOptionsVertButton
 import red.razvan.restcountries.android.compose.design.NavigateUpButton
-import red.razvan.restcountries.android.compose.design.PropertiesCard
-import red.razvan.restcountries.android.compose.design.Property
 import red.razvan.restcountries.android.compose.design.RefreshDropdownMenuItem
 import red.razvan.restcountries.android.compose.design.toContainerAndContentPadding
 import red.razvan.restcountries.data.models.CountryId
 import red.razvan.restcountries.data.models.Currency
 import red.razvan.restcountries.data.models.DetailedCountry
+import red.razvan.restcountries.data.models.Language
 
 @Composable
 internal fun CountryDetailsScreen(
@@ -260,123 +264,214 @@ private fun CountryDetailsContent(
         )
       }
 
-      CountryDetailsCard(
-        emojiFlag = country.emojiFlag,
-        capital = country.capital,
-        continents = country.continents,
-        languages = country.languages.map { it.name },
-        currencies = country.currencies,
-        modifier = Modifier.padding(top = 16.dp),
-      )
+      Column(
+        verticalArrangement = Arrangement
+          .spacedBy(4.dp),
+        modifier = Modifier
+          .padding(top = 16.dp),
+      ) {
+        if (country.continents.isNotEmpty()) {
+          ContinentsCard(
+            continents = country.continents,
+          )
+        }
+
+        if (country.capital.isNotEmpty()) {
+          CapitalCard(
+            capitals = country.capital,
+          )
+        }
+
+        if (country.languages.isNotEmpty()) {
+          LanguagesCard(
+            languages = country.languages,
+          )
+        }
+
+        if (country.currencies.isNotEmpty()) {
+          CurrenciesCard(
+            currencies = country.currencies,
+          )
+        }
+
+        OtherDetailsCard(
+          emojiFlag = country.emojiFlag,
+        )
+      }
     }
   }
 }
 
 @Composable
-private fun CountryDetailsCard(
-  emojiFlag: String,
-  capital: List<String>,
+private fun ContinentsCard(
   continents: List<String>,
-  languages: List<String>,
+  modifier: Modifier = Modifier,
+) {
+  ConnectedCardGroup(
+    title = {
+      Text(
+        text = pluralStringResource(
+          R.plurals.country_details_screen_continents_card_title,
+          continents.size,
+        ),
+      )
+    },
+    modifier = modifier,
+    cards = continents.map { continent ->
+      ConnectableCardProperties(
+        content = @Composable {
+          Text(text = continent)
+        },
+      )
+    },
+  )
+}
+
+@Composable
+private fun CapitalCard(
+  capitals: List<String>,
+  modifier: Modifier = Modifier,
+) {
+  ConnectedCardGroup(
+    title = {
+      Text(
+        text = pluralStringResource(
+          R.plurals.country_details_screen_capitals_card_title,
+          capitals.size,
+        ),
+      )
+    },
+    modifier = modifier,
+    cards = capitals.map { capital ->
+      ConnectableCardProperties(
+        content = @Composable {
+          Text(text = capital)
+        },
+      )
+    },
+  )
+}
+
+@Composable
+private fun LanguagesCard(
+  languages: List<Language>,
+  modifier: Modifier = Modifier,
+) {
+  ConnectedCardGroup(
+    title = {
+      Text(
+        text = pluralStringResource(
+          R.plurals.country_details_screen_languages_cards_title,
+          languages.size,
+        ),
+      )
+    },
+    modifier = modifier,
+    cards = languages.map { language ->
+      ConnectableCardProperties(
+        content = @Composable {
+          Text(text = language.name)
+        },
+      )
+    },
+  )
+}
+
+@Composable
+private fun CurrenciesCard(
   currencies: List<Currency>,
   modifier: Modifier = Modifier,
 ) {
-  PropertiesCard(
-    properties = {
-      if (continents.isNotEmpty()) {
-        Property(
-          title = {
-            Text(
-              text = pluralStringResource(
-                R.plurals.country_details_screen_continents_property_title,
-                capital.size,
-              ),
-            )
-          },
-          value = {
-            Text(
-              text = continents.joinToString(separator = ", "),
-            )
-          },
-        )
-      }
-
-      if (capital.isNotEmpty()) {
-        Property(
-          title = {
-            Text(
-              text = pluralStringResource(
-                R.plurals.country_details_screen_capital_property_title,
-                capital.size,
-              ),
-            )
-          },
-          value = {
-            Text(
-              text = capital.joinToString(separator = ", "),
-            )
-          },
-        )
-      }
-
-      if (languages.isNotEmpty()) {
-        Property(
-          title = {
-            Text(
-              text = pluralStringResource(
-                R.plurals.country_details_screen_languages_property_title,
-                languages.size,
-              ),
-            )
-          },
-          value = {
-            Text(
-              text = languages.joinToString(separator = ", "),
-            )
-          },
-        )
-      }
-
-      if (currencies.isNotEmpty()) {
-        Property(
-          title = {
-            Text(
-              text = pluralStringResource(
-                R.plurals.country_details_screen_currencies_property_title,
-                currencies.size,
-              ),
-            )
-          },
-          value = {
-            @Suppress("SimplifiableCallChain")
-            Text(
-              text = currencies
-                .map { currency ->
-                  stringResource(
-                    R.string.country_details_currencies_property_value,
-                    currency.name,
-                    currency.symbol,
-                  )
-                }
-                .joinToString(separator = ", "),
-            )
-          },
-        )
-      }
-
-      Property(
-        title = {
+  ConnectedCardGroup(
+    title = {
+      Text(
+        text = pluralStringResource(
+          R.plurals.country_details_screen_currencies_card_title,
+          currencies.size,
+        ),
+      )
+    },
+    modifier = modifier,
+    cards = currencies.map { currency ->
+      ConnectableCardProperties(
+        content = @Composable {
           Text(
-            text = stringResource(R.string.country_details_screen_emoji_flag_property_title),
-          )
-        },
-        value = {
-          Text(
-            text = emojiFlag,
+            text = stringResource(
+              R.string.country_details_screen_currency_property_value,
+              currency.name,
+              currency.symbol,
+            ),
           )
         },
       )
     },
-    modifier = modifier,
   )
+}
+
+@Composable
+private fun OtherDetailsCard(
+  emojiFlag: String,
+  modifier: Modifier = Modifier,
+) {
+  ConnectedCardGroup(
+    title = {
+      Text(
+        text = stringResource(R.string.country_details_screen_other_details_card_title),
+      )
+    },
+    modifier = modifier,
+    cards = listOf(
+      ConnectableCardProperties(
+        content = {
+          EmojiFlagItem(emojiFlag = emojiFlag)
+        },
+      ),
+    ),
+  )
+}
+
+@Composable
+private fun EmojiFlagItem(
+  emojiFlag: String,
+  modifier: Modifier = Modifier,
+) {
+  ListItemDetail(
+    modifier = modifier,
+    title = {
+      Text(text = stringResource(R.string.country_details_screen_emoji_flag_property_title))
+    },
+    value = {
+      Text(text = emojiFlag)
+    },
+  )
+}
+
+@Composable
+private fun ListItemDetail(
+  title: @Composable () -> Unit,
+  value: @Composable () -> Unit,
+  modifier: Modifier = Modifier,
+) {
+  Row(
+    modifier = modifier,
+    horizontalArrangement = Arrangement
+      .spacedBy(4.dp),
+  ) {
+    Box(
+      modifier = Modifier.weight(1f),
+      contentAlignment = Alignment.CenterStart,
+    ) {
+      ProvideTextStyle(MaterialTheme.typography.bodyLarge) {
+        title()
+      }
+    }
+    Box(
+      modifier = Modifier.weight(1f),
+      contentAlignment = Alignment.CenterEnd,
+    ) {
+      ProvideTextStyle(MaterialTheme.typography.bodyMedium) {
+        value()
+      }
+    }
+  }
 }

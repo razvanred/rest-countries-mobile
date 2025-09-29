@@ -4,24 +4,25 @@
 
   <string name="country_details_screen_title">Paese</string>
   <string name="country_details_country_common_name_label">Conosciuto anche come %s</string>
-  <plurals name="country_details_screen_languages_property_title" tools:ignore="MissingQuantity">
+  <plurals name="country_details_screen_languages_cards_title" tools:ignore="MissingQuantity">
     <item quantity="one">Lingua</item>
     <item quantity="other">Lingue</item>
   </plurals>
-  <plurals name="country_details_screen_continents_property_title" tools:ignore="MissingQuantity">
+  <plurals name="country_details_screen_continents_card_title" tools:ignore="MissingQuantity">
     <item quantity="one">Continente</item>
     <item quantity="other">Continenti</item>
   </plurals>
-  <plurals name="country_details_screen_capital_property_title" tools:ignore="MissingQuantity">
+  <plurals name="country_details_screen_capitals_card_title" tools:ignore="MissingQuantity">
     <item quantity="one">Capitale</item>
     <item quantity="other">Capitali</item>
   </plurals>
-  <plurals name="country_details_screen_currencies_property_title" tools:ignore="MissingQuantity">
+  <plurals name="country_details_screen_currencies_card_title" tools:ignore="MissingQuantity">
     <item quantity="one">Valuta</item>
     <item quantity="other">Valute</item>
   </plurals>
+  <string name="country_details_screen_other_details_card_title">Altri dettagli</string>
   <string name="country_details_screen_emoji_flag_property_title">Bandiera emoji</string>
-  <string name="country_details_currencies_property_value">%1$s (%2$s)</string>
+  <string name="country_details_screen_currency_property_value">%1$s (%2$s)</string>
 
   <string name="licenses_screen_title">Licenze</string>
 
