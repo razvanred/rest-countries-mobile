@@ -94,7 +94,7 @@ assertk-coroutines = { module = "com.willowtreeapps.assertk:assertk-coroutines",
 
 turbine = "app.cash.turbine:turbine:1.2.1"
 
-okhttp-mockwebserver = "com.squareup.okhttp3:mockwebserver3:5.1.0"
+okhttp-mockwebserver = "com.squareup.okhttp3:mockwebserver3:5.2.1"
 
 ktlint-compose-rules = "io.nlopez.compose.rules:ktlint:0.4.27"
 
