@@ -5,6 +5,8 @@ package red.razvan.restcountries.android.compose.design
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.MaterialExpressiveTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
@@ -14,6 +16,7 @@ import red.razvan.restcountries.android.compose.design.internal.DarkColorScheme
 import red.razvan.restcountries.android.compose.design.internal.LightColorScheme
 import red.razvan.restcountries.android.compose.design.internal.Typography
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun RestCountriesTheme(
   darkTheme: Boolean = isSystemInDarkTheme(),
@@ -31,7 +34,7 @@ fun RestCountriesTheme(
     else -> LightColorScheme
   }
 
-  MaterialTheme(
+  MaterialExpressiveTheme(
     colorScheme = colorScheme,
     typography = Typography,
     content = content,
